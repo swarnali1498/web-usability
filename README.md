@@ -11,15 +11,14 @@
 ## API end-points
 
 ```
-GET /participant/
-response : list of all users
-[{name:"sarthak", password:"1234", ... , }]
+GET /participant/:id
+response : participant details  
 ```
 
 ```
 POST /participant/login
 {
-  name: "user name",
+  email: "email id",
   password: "user password"
 }
 ```
