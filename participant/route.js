@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const Participant = require('./model/Participant');
 // rend details about a participant
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const participants = await Participant.find();
+        const id = req.params.id;
+        const participants = await Participant.findOne({
+            __id: id
+        });
         res.json(participants);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -12,8 +15,18 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
+
+        const check_participant = await Participant.find({
+            email: req.body.email
+        });
+
+        if (check_participant.length != 0) {
+            res.status(400).json({ error: "User already exists" });
+            return;
+        }
+
         const participant = new Participant({
-            name: req.body.name,
+            name: req.body.email,
             password: req.body.password
         });
         const new_part = await participant.save();
