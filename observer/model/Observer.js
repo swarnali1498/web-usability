@@ -1,4 +1,4 @@
-// participant schema
+// observer schema
 const { model } = require('mongoose');
 const mongoose = require('mongoose');
 
