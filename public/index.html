@@ -116,6 +116,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
       <script> //$('.carousel').carousel(); 
         user=["participant","observer"];
+        var server_address="http://localhost:3001/"
         var request;
         var url="";
         var x=0;
@@ -151,24 +152,27 @@
       async function handleSubmit(event) {
         event.preventDefault();
         
-        const form = event.currentTarget;
-        request = form.getAttribute("request");
-        const url = "http://localhost:3001/"+user[x]+request;
-        console.log(url);
-        try {
-          const formData = new FormData(form);
-          const responseData = await postFormDataAsJson({ url, formData });
-          console.log({ responseData });
-          let responseObj = JSON.parse(responseData);
-          if(responseObj[message]=="valid participant"){
-
-          }else{
-              document.getElementById("alertBox").classList.remove("visually-hidden");
-          }
+         const form = event.currentTarget;
+        // request = form.getAttribute("request");
+        // const url = server_address+user[x]+request;
+        // console.log(url);
+        // try {
+           const formData = new FormData(form);
+        //   const responseData = await postFormDataAsJson({ url, formData });
+        //   console.log({ responseData });
+        //   let responseObj = JSON.parse(responseData);
+         // if(responseObj[message]=="valid participant"){
+              sessionStorage.setItem('user_email',formData.get('email'));
+              sessionStorage.setItem('user_type',formData.get(user[x]));
+              sessionStorage.setItem('server_address',formData.get(user[x]));
+              window.location.replace("http://localhost:80/projectpage.html");
+        //   }else{
+        //        alert("Invalid Details"));
+        //   }
           
-        } catch (error) {
-          console.error(error);
-        }
+        // } catch (error) {
+        //   console.error(error);
+        // }
       }
         const loginForm = document.getElementById("login-form");
         loginForm.addEventListener("submit", handleSubmit);
