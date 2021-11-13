@@ -1,0 +1,23 @@
+{
+  "name": "web-usability",
+  "version": "1.0.0",
+  "description": "## Modules required: * express   * to create routes and APIs * mongoose   * to connect with mongoDB * dotenv   * to fetch environment variables",
+  "main": "create_server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swarnali1498/web-usability.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swarnali1498/web-usability/issues"
+  },
+  "homepage": "https://github.com/swarnali1498/web-usability#readme"
+}
