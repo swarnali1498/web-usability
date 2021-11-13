@@ -21,6 +21,7 @@ mongoose.connect(DB_URL,
 app.use(express.json());
 
 const route_participant = require('./participant/route');
+const route_observer = require('./observer/route');
 
 app.use('/participant', route_participant);
 

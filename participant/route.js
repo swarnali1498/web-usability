@@ -1,9 +1,20 @@
 const router = require('express').Router();
+const verify_token = require('../middleware/verify_token');
 const Participant = require('./model/Participant');
-// rend details about a participant
-router.get('/:id', async (req, res) => {
+
+const JWT = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const {
+    JWT_SECRET = 'secret ;P'
+} = process.env;
+
+// send details about a participant
+router.get('/', verify_token, async (req, res) => {
     try {
-        const id = req.params.id;
+        const id = req.body.id;
         const participants = await Participant.findOne({
             __id: id
         });
@@ -13,33 +24,26 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+
+router.get('/projects', verify_token, async (req, res) => {
     try {
-
-        const check_participant = await Participant.find({
-            email: req.body.email
+        const id = req.body.id;
+        const participants = await Participant.findOne({
+            __id: id
         });
 
-        if (check_participant.length != 0) {
-            res.status(400).json({ error: "User already exists" });
-            return;
-        }
+        console.log(participants);
 
-        const participant = new Participant({
-            name: req.body.email,
-            password: req.body.password
-        });
-        const new_part = await participant.save();
-        res.status(201).json(new_part);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
+
 router.post('/login', async (req, res) => {
     try {
         const participants = await Participant.find({
-            name: req.body.name
+            email: req.body.email
         });
         if (participants.length != 1) {
             res.status(400).json({ error: "auth err 1" });
@@ -51,7 +55,38 @@ router.post('/login', async (req, res) => {
             res.status(400).json({ error: "auth err 2" });
         }
         else {
-            res.status(200).json({ message: "valid participant" });
+            const data = {
+                id: participants[0]["__id"],
+                email: req.body.email,
+                name: participants[0]["name"]
+            };
+            const token = JWT.sign(data, JWT_SECRET);
+            res.status(200).json({ message: "valid participant", token: token });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+router.post('/register', async (req, res) => {
+    try {
+        const participants = await Participant.find({
+            email: req.body.email
+        });
+        if (participants.length != 0) {
+            res.status(400).json({ error: "auth err 1" });
+        }
+        else {
+            const participant = new Participant({
+                email: req.body.email,
+                password: req.body.password,
+                name: req.body.name,
+                age: req.body.age,
+                gender: req.body.gender
+            });
+
+            const new_part = await participant.save();
+            res.status(200).json(new_part);
         }
     } catch (err) {
         res.status(500).json({ error: err.message });
