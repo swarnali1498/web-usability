@@ -1,3 +1,10 @@
+html{
+  font-size: max(1em, 1.2vw);
+}
+.w-100 {
+  width: 100vw !important;
+  height: auto;
+}
 .center {
     display: block;
     margin-left: auto;
@@ -8,16 +15,39 @@
 #contentPanel{
   padding: 5vh;
   max-width: 70%;
+  
   margin: auto;
   border:solid black 2px;
 }
 #projectList{
-  width: inherit;
   display: flex;
   flex-flow: column wrap;
-  max-height:30vh;
-  
+  max-height:32vh;  
+  width:fit-content;
+}
+
+.box{
+  border:solid black 2px;
 }
 .projectItem{
+  min-width: 100%;
   margin: 1vh;
+}
+#calender{
+  height:60vh;
+}
+#projectDetails{
+  height:30vh;
+}
+#projectStats{
+  height:40vh;
+}
+#taskList{
+  display: flex;
+  flex-flow: column wrap;
+  height:60vh;
+}
+.tasksItem{
+  min-width: 100%;
+  margin: 2vh;
 }
