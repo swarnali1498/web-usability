@@ -16,7 +16,7 @@ module.exports = function (req, res, next) {
                 res.send({ err }); return;
             }
             console.log(authData);
-            req.body.id = authData.id;
+            req.__id = authData.id;
             next();
         });
     } else {

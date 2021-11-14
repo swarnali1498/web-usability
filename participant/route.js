@@ -14,7 +14,7 @@ const {
 // send details about a participant
 router.get('/', verify_token, async (req, res) => {
     try {
-        const id = req.body.id;
+        const id = req.__id;
         const participants = await Participant.findOne({
             __id: id
         });
@@ -27,7 +27,7 @@ router.get('/', verify_token, async (req, res) => {
 
 router.get('/projects', verify_token, async (req, res) => {
     try {
-        const id = req.body.id;
+        const id = req.__id;
         const participants = await Participant.findOne({
             __id: id
         });
