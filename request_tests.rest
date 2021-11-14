@@ -1,0 +1,38 @@
+POST http://localhost:3000/participant/register
+Content-Type: application/json
+Authorization: token xxx
+
+{
+    "email": "sarthak.rawat@students.iiit.ac.in",
+    "password": "1234",
+    "name": "sarthak rawat",
+    "age": 100,
+    "gender": "Male"
+}
+
+
+###
+
+POST http://localhost:3000/participant/login
+Content-Type: application/json
+Authorization: token xxx
+
+{
+    "email": "sarthak.rawat@students.iiit.ac.in",
+    "password": "1234"
+}
+
+
+###
+
+
+GET http://localhost:3000/participant/
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYWsucmF3YXRAc3R1ZGVudHMuaWlpdC5hYy5pbiIsIm5hbWUiOiJzYXJ0aGFrIHJhd2F0IiwiaWF0IjoxNjM2ODE2ODU4fQ.mD42iTOqnSQ4FeavikkQeCraxP24o5Wt5RU3t3JWv3A
+
+###
+
+
+GET http://localhost:3000/participant/projects
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYWsucmF3YXRAc3R1ZGVudHMuaWlpdC5hYy5pbiIsIm5hbWUiOiJzYXJ0aGFrIHJhd2F0IiwiaWF0IjoxNjM2ODE2ODU4fQ.mD42iTOqnSQ4FeavikkQeCraxP24o5Wt5RU3t3JWv3A
