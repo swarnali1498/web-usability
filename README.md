@@ -7,6 +7,8 @@
   * to connect with mongoDB
 * dotenv
   * to fetch environment variables
+* jsonwebtoken
+  * to create JWT for API requests
   
 ## API end-points
 
