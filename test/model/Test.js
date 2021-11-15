@@ -15,8 +15,13 @@ const test_schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    observer_id: {
+        type: String,
+        required: true
+    },
     sched_time: {
         type: Date,
+        required: true
     },
     start_time: {
         type: Date
@@ -34,7 +39,7 @@ const test_schema = new mongoose.Schema({
             required: true
         }
     }],
-    video_URL: {
+    video_url: {
         type: String
     }
 });
