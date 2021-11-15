@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const verify_token = require('../middleware/verify_token');
 const Observer = require('./model/Observer');
 
 const JWT = require('jsonwebtoken');

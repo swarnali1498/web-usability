@@ -22,8 +22,15 @@ app.use(express.json());
 
 const route_participant = require('./participant/route');
 const route_observer = require('./observer/route');
+const route_project = require('./project/route');
+const route_task = require('./task/route');
+const route_test = require('./test/route');
 
 app.use('/participant', route_participant);
+app.use('/observer', route_observer);
+app.use('/project', route_project);
+app.use('/task', route_task);
+app.use('/test', route_test);
 
 app.listen(PORT, () => {
     console.log("running server");
