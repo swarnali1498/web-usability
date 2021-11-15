@@ -23,7 +23,13 @@ const participant_schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    tests: [{
+    tests_taken: [{
+        test_id: {
+            type: String,
+            required: true
+        }
+    }],
+    tests_sched: [{
         test_id: {
             type: String,
             required: true
