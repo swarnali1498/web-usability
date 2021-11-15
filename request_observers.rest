@@ -1,13 +1,11 @@
-POST http://localhost:3000/observer/register
+POST http://localhost:3000//add_event
 Content-Type: application/json
 Authorization: token xxx
 
 {
     "email": "obs00@students.iiit.ac.in",
     "password": "1234",
-    "name": "sarthak rawat",
-    "age": 100,
-    "gender": "Male"
+    "name": "sarthak rawat"
 }
 
 

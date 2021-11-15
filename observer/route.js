@@ -18,6 +18,7 @@ router.get('/', verify_token, async (req, res) => {
         const observers = await Observer.findOne({
             __id: id
         });
+        console.log(observers);
         res.json(observers);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -45,6 +46,7 @@ router.post('/login', async (req, res) => {
                 name: observers[0]["name"]
             };
             const token = JWT.sign(data, JWT_SECRET);
+            console.log({ message: "valid participant", token: token });
             res.status(200).json({ message: "valid participant", token: token });
         }
     } catch (err) {
@@ -65,8 +67,6 @@ router.post('/register', async (req, res) => {
                 email: req.body.email,
                 password: req.body.password,
                 name: req.body.name,
-                age: req.body.age,
-                gender: req.body.gender
             });
 
             const new_part = await observer.save();
