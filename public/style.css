@@ -2,8 +2,12 @@ html{
   font-size: max(1em, 1.2vw);
 }
 .w-100 {
-  width: 100vw !important;
+  width: 99vw !important;
   height: auto;
+}
+.h-90 {
+  width: 100vw !important;
+  height: 88vh !important;
 }
 .center {
     display: block;
@@ -24,10 +28,12 @@ html{
   flex-flow: column wrap;
   max-height:32vh;  
   width:fit-content;
+  min-width: 25%;
 }
 
 .box{
   border:solid black 2px;
+  padding: 1vh;
 }
 .projectItem{
   min-width: 100%;
