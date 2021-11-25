@@ -19,7 +19,7 @@ router.get('/:project_id/:task_id', verify_token, async (req, res) => {
             project_id: project_id,
             task_id: task_id
         });
-        res.json(tests);
+        res.status(200).json(tests);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

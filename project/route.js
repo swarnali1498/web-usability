@@ -78,7 +78,7 @@ router.post('/task/:project_id', verify_token, async (req, res) => {
             _id: project_id
         });
 
-        projects["tasks"].push({ id: new_task.__id, name: new_task.name });
+        projects["tasks"].push({ id: new_task._id, name: new_task.name });
         projects.save();
         res.status(200).json({ message: "successfully added new task" });
     } catch (err) {

@@ -16,7 +16,7 @@ Content-Type: application/json
 Authorization: token xxx
 
 {
-    "email": "obs00@students.iiit.ac.in",
+    "email": "sarthak@gmail.com",
     "password": "1234"
 }
 
