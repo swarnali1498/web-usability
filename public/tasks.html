@@ -84,26 +84,26 @@
       url=server_address+"projects/";
 
       url=url+project_id+"/"+task_id;
-      // async function getResponse(url) {
+      async function getResponse(url) {
         
-      //   const fetchOptions = {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       "Accept": "application/json",
-      //       "Authorization": token,
-      //     }
-      //   };
-      //   try{
-      //     let response = await fetch(url,fetchOptions);
-      //     return await response.json();
-      //   }catch(err){
-      //     console.error(err);
-      //   }
-      // }
-      // const taskInfo = await getResponse(url+"info/");
+        const fetchOptions = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": token,
+          }
+        };
+        try{
+          let response = await fetch(url,fetchOptions);
+          return await response.json();
+        }catch(err){
+          console.error(err);
+        }
+      }
+      const responseTaskInfo = await getResponse(url+"info/");
       
-      var responseTaskInfo ='[{"URL":"www.iith.ac.in/taskpage", "description":"Perform some task. and work towards work-related goals. Achieve all project goals. "}]'
+     // var responseTaskInfo ='[{"URL":"www.iith.ac.in/taskpage", "description":"Perform some task. and work towards work-related goals. Achieve all project goals. "}]'
       
       var task_info_object = JSON.parse( responseTaskInfo )[0]
 
