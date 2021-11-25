@@ -33,6 +33,7 @@ app.use('/project', route_project);
 app.use('/task', route_task);
 app.use('/test', route_test);
 app.use('/calendar', route_calendar);
+app.use(express.static('public'));
 
 app.listen(PORT, () => {
     console.log("running server");
