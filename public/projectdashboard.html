@@ -182,7 +182,7 @@
 
     function handleTaskSelect(id) {
       console.log(id);
-      sessionStorage.setItem('task_id', taskList["data"][id]._id);
+      sessionStorage.setItem('task_id', taskList["data"][id].id);
       sessionStorage.setItem('task_name', taskList["data"][id].name);
       if (user_type != "observer/") {
         window.location.href = "tasks.html";

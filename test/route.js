@@ -15,7 +15,7 @@ router.get('/:project_id/:task_id', verify_token, async (req, res) => {
     try {
         const project_id = req.params.project_id;
         const task_id = req.params.task_id;
-        const tests = await Test.findOne({
+        const tests = await Test.find({
             project_id: project_id,
             task_id: task_id
         });

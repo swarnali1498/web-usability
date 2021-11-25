@@ -17,6 +17,7 @@ router.get('/:task_id', verify_token, async (req, res) => {
         const tasks = await Task.findOne({
             _id: id
         });
+        // const tasks = await Task.find();
         res.json(tasks);
     } catch (err) {
         res.status(500).json({ message: err.message });
