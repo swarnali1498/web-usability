@@ -18,7 +18,7 @@ const task_schema = new mongoose.Schema({
     mouse_coods: {
         URL: {
             type: String,
-            required: True
+            required: true
         },
         mouse_coords: [{
             X: {
