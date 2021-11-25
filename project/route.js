@@ -11,13 +11,15 @@ const {
     JWT_SECRET = 'secret ;P'
 } = process.env;
 
-router.get('/', verify_token, async (req, res) => {
+
+router.get('/:project_id/info', verify_token, async (req, res) => {
     try {
-        const id = req.__id;
-        const projects = await Project.findOne({
-            __id: id
+        const project_id = req.params.project_id;
+        const project = await Project.findOne({
+            __id: project_id
         });
-        res.json(projects);
+
+        res.json(project);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -28,14 +30,41 @@ router.post('/', verify_token, async (req, res) => {
         const project = new Project({
             name: req.body.name,
             description: req.body.description,
-            URL: req.body.URL,
-            tests: req.body.tests
+            organisation: req.body.organisation,
+            URL: req.body.URL
         });
 
         const new_proj = await project.save();
         res.status(200).json(new_proj);
     } catch (err) {
         res.status(500).json({ error: err.message });
+    }
+});
+
+router.get('/tasks/:project_id', verify_token, async (req, res) => {
+    try {
+        const project_id = req.params.project_id;
+        const project = await Project.findOne({
+            __id: project_id
+        });
+        res.status(200).json({ data: project["tasks"] });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.post('/task/:project_id', verify_token, async (req, res) => {
+    try {
+        const project_id = req.params.project_id;
+        const task_id = req.body.task_id;
+        const projects = await Project.findOne({
+            __id: project_id
+        });
+        projects["tasks"].push(task_id);
+        projects.save();
+        res.status(200).json({ message: "successfully added new task" });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 

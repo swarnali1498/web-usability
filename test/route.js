@@ -11,17 +11,39 @@ const {
     JWT_SECRET = 'secret ;P'
 } = process.env;
 
-router.get('/', verify_token, async (req, res) => {
+router.get('/:project_id/:task_id', verify_token, async (req, res) => {
     try {
-        const id = req.__id;
+        const project_id = req.params.project_id;
+        const task_id = req.params.task_id;
         const tests = await Test.findOne({
-            __id: id
+            project_id: project_id,
+            task_id: task_id
         });
         res.json(tests);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
+
+router.get('/participant/:project_id/', verify_token, async (req, res) => {
+    try {
+        const project_id = req.params.project_id;
+        const part_id = req.__id;
+        const tests = await Test.find({
+            project_id: project_id,
+            participant_id: part_id
+        });
+        test_list = [];
+        for (let test in tests) {
+            test_list.push(test["task_id"])
+        }
+        res.json({ data: test_list });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 
 router.post('/create', verify_token, async (req, res) => {
     try {

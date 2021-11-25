@@ -31,13 +31,13 @@ router.post('/login', async (req, res) => {
             email: req.body.email
         });
         if (observers.length != 1) {
-            res.status(400).json({ error: "auth err 1" });
+            res.status(400).json({ message: "auth err 1" });
         }
         else if (observers[0]["password"] != req.body.password) {
             console.log(observers[0]);
             console.log(req.body.password);
 
-            res.status(400).json({ error: "auth err 2" });
+            res.status(400).json({ message: "auth err 2" });
         }
         else {
             const data = {
@@ -47,10 +47,10 @@ router.post('/login', async (req, res) => {
             };
             const token = JWT.sign(data, JWT_SECRET);
             console.log({ message: "valid participant", token: token });
-            res.status(200).json({ message: "valid participant", token: token });
+            res.status(200).json({ message: "valid participant", sessionID: token });
         }
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: err.message });
     }
 });
 
@@ -60,7 +60,7 @@ router.post('/register', async (req, res) => {
             email: req.body.email
         });
         if (observers.length != 0) {
-            res.status(400).json({ error: "auth err 1" });
+            res.status(400).json({ message: "auth err 1" });
         }
         else {
             const observer = new Observer({
@@ -73,7 +73,7 @@ router.post('/register', async (req, res) => {
             res.status(200).json(new_part);
         }
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: err.message });
     }
 });
 

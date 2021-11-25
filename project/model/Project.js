@@ -11,12 +11,20 @@ const project_schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    organisation: {
+        type: String,
+        required: true
+    },
     URL: {
         type: String,
         required: true
     },
-    tests: [{
-        test_id: {
+    tasks: [{
+        id: {
+            type: String,
+            required: true
+        },
+        name: {
             type: String,
             required: true
         }

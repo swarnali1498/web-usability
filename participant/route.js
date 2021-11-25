@@ -28,16 +28,30 @@ router.get('/', verify_token, async (req, res) => {
 router.get('/projects', verify_token, async (req, res) => {
     try {
         const id = req.__id;
-        const participants = await Participant.findOne({
+        const participant = await Participant.findOne({
             __id: id
         });
-
         console.log(participants);
-
+        res.status(200).json({ data: participant["projects"] });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
+// router.get('/projects/:project_id/tasks', verify_token, async (req, res) => {
+//     try {
+//         const id = req.__id;
+//         const participants = await Participant.findOne({
+//             __id: id
+//         });
+
+//         console.log(participants);
+//         res.status(200).json({ data: participant["projects"] });
+
+//     } catch (err) {
+//         res.status(500).json({ message: err.message });
+//     }
+// });
 
 
 router.post('/login', async (req, res) => {
@@ -46,13 +60,13 @@ router.post('/login', async (req, res) => {
             email: req.body.email
         });
         if (participants.length != 1) {
-            res.status(400).json({ error: "auth err 1" });
+            res.status(400).json({ message: "auth err 1" });
         }
         else if (participants[0]["password"] != req.body.password) {
             console.log(participants[0]);
             console.log(req.body.password);
 
-            res.status(400).json({ error: "auth err 2" });
+            res.status(400).json({ message: "auth err 2" });
         }
         else {
             const data = {
@@ -61,7 +75,7 @@ router.post('/login', async (req, res) => {
                 name: participants[0]["name"]
             };
             const token = JWT.sign(data, JWT_SECRET);
-            res.status(200).json({ message: "valid participant", token: token });
+            res.status(200).json({ message: "valid participant", sessionID: token });
         }
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -74,7 +88,7 @@ router.post('/register', async (req, res) => {
             email: req.body.email
         });
         if (participants.length != 0) {
-            res.status(400).json({ error: "auth err 1" });
+            res.status(400).json({ message: "auth err 1" });
         }
         else {
             const participant = new Participant({
@@ -89,7 +103,7 @@ router.post('/register', async (req, res) => {
             res.status(200).json(new_part);
         }
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: err.message });
     }
 });
 

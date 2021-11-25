@@ -23,18 +23,28 @@ const participant_schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    tests_taken: [{
-        test_id: {
+    projects: [{
+        id: {
+            type: String,
+            required: true
+        },
+        name: {
             type: String,
             required: true
         }
     }],
-    tests_sched: [{
-        test_id: {
+    tests: [{
+        id: {
             type: String,
             required: true
         }
-    }],
+    }]
+    // tests_sched: [{
+    //     test_id: {
+    //         type: String,
+    //         required: true
+    //     }
+    // }],
 });
 
 module.exports = mongoose.model("Participant", participant_schema);
