@@ -27,6 +27,10 @@
               <h5 class="modal-title" id="staticBackdropLabel">Task Description</h5>
               <button  id="btn-close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div>
+
+              
+            </div>
             <div class="modal-body">
               <p id="taskDescription" ></p>
             </div>
@@ -37,11 +41,35 @@
         </div>
       </div>
     <div id="frame" class="h-90 box row justify-content-start">
-      
+      <iframe id="iframes" width="100%" frameborder="100" marginheight="1000" marginwidth="100" height="1000px" src="index1.html"></iframe>
+ <!-- <iframe width="100%" frameborder="0" marginheight="0" marginwidth="0" height="1700px" src="https://www.geeksforgeeks.org/?igu=1"></iframe> -->
+  <button id="start">
+    Start Recording
+  </button>
+  <button id="stop" disabled>
+    Stop Recording
+  </button>
+
+  <button id="show" disabled onclick="play_recording()">Show Recording</button>
+  <br>
+  <video width="400" height="400" controls >
+   <script type="module" src="https://unpkg.com/x-frame-bypass"></script>
+   <script type="text/javascript">
+
+            $(document).ready(function(){
+            setTimeout(()=>{
+            // console.log("HELLO")
+            let iframeElement = document.getElementById('iframes');
+            iframeElement.contentWindow.document.onclick=(e) => { console.log(e.offsetX+e.view.scrollX, e.offsetY+e.view.scrollY);
+              console.log( e.view.outerWidth+e.view.scrollX,e.view.outerHeight+e.view.scrollY); };
+            },500)
+            });
+
+        </script>
     </div>
     
     </div>
-    <footer id="footer">
+    <!-- <footer id="footer">
         <div class="container-fluid">
         <div class="row-fluid" style="margin-top: 20px;font-size: 13px;">
             <div class="container">
@@ -50,7 +78,7 @@
             </div>
         </div>
         </div>
-    </footer>
+    </footer> -->
 
  <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
      <!-- CSS only -->
@@ -112,5 +140,7 @@
       
   </script> 
  
-  </body>
+
+  <script src="script_rec.js"></script>
+</body>
 </html>
