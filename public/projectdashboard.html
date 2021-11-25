@@ -119,8 +119,8 @@
     var token = sessionStorage.getItem('token')
     var project_id = sessionStorage.getItem('project_id')
     var project_name = sessionStorage.getItem('project_name')
-    url = "";
-
+    url_post = "";
+    url_get = "";
     /* 
       observer: fetch tasks of the project_id
   
@@ -128,11 +128,12 @@
     */
 
     if (user_type == "participant/") {
-      url = server_address + user_type + "project/";
+      url_post = server_address +"project/tasks/"+project_id;
+      url_get = server_address +"tasks/"+user_type+ project_id;
     } else {
-      url = server_address + "project/";
+      url_get = server_address +"project/tasks/"+project_id;
     }
-    url = url + project_id + "/";
+   // url = url + project_id + "/";
     async function getResponse(url) {
 
       const fetchOptions = {
@@ -151,35 +152,41 @@
         console.error(err);
       }
     }
-    var taskList = await getResponse(url + "tasks/");
-    var projectInfo = await getResponse(url + "info/");
+    var taskList;
+    var projectInfo;
+    let wraper = async function () {
+      var taskList = await getResponse(url_get);
+      var projectInfo = await getResponse("/project/"+project_id+"/info/");
+      var project_info_object = projectInfo[0]
+      var tmp = '';
+      $.each(taskList, function (key, value) {
+        tmp += '<a class="btn btn-outline-primary projectItem col-4" onClick="handleTaskSelect(' + value.id + ')">';
+        tmp += value.name
+        tmp += '</a>';
+      });
+      $('#taskList').prepend(tmp);
+      function handleTaskSelect(id) {
+        console.log(id);
+        sessionStorage.setItem('task_id', taskList[id - 1].id);
+        sessionStorage.setItem('task_name', taskList[id - 1].name);
+        if (user_type != "observer/") {
+          window.location.href = "tasks.html";
+        } else {
+          window.location.href = "tasksdashboard.html";
+        }
+      }
+      $('#projectName').prepend(project_name);
+      $('#projectOrganization').prepend(project_info_object["organization"]);
+      $('#projectURL').prepend(project_info_object["URL"]);
+      $('#projectDescription').prepend(project_info_object["description"]);
+    }
     //var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
     // var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
-
+    wraper();
     //var taskList = JSON.parse( responseList );
-    var project_info_object = projectInfo[0]
-    var tmp = '';
-    $.each(taskList, function (key, value) {
-      tmp += '<a class="btn btn-outline-primary projectItem col-4" onClick="handleTaskSelect(' + value.id + ')">';
-      tmp += value.name
-      tmp += '</a>';
-    });
-    $('#taskList').prepend(tmp);
-    function handleTaskSelect(id) {
-      console.log(id);
-      sessionStorage.setItem('task_id', taskList[id - 1].id);
-      sessionStorage.setItem('task_name', taskList[id - 1].name);
-      if (user_type != "observer/") {
-        window.location.href = "tasks.html";
-      } else {
-        window.location.href = "tasksdashboard.html";
-      }
-    }
-    $('#projectName').prepend(project_name);
-    $('#projectOrganization').prepend(project_info_object["organization"]);
-    $('#projectURL').prepend(project_info_object["URL"]);
-    $('#projectDescription').prepend(project_info_object["description"]);
-    console.log(project_info_object["description"])
+   
+    
+    //console.log(project_info_object["description"])
     if (user_type != "observer/") {
       console.log("sda");
       $("#adminMode").hide();
@@ -219,12 +226,12 @@
     async function handleSubmit(event) {
       event.preventDefault();
       const form = event.currentTarget;
-      request = form.getAttribute("request");
-      const url_task = server_address + request + "/" + project_id;
-      console.log(url);
+      //request = form.getAttribute("request");
+      //const url_task = server_address + request + "/" + project_id;
+      //console.log(url);
       try {
         const formData = new FormData(form);
-        const responseObj = await postFormDataAsJson({ url_task, formData });
+        const responseObj = await postFormDataAsJson({ url_post, formData });
         //let responseObj = JSON.parse(responseData);
       } catch (error) {
         console.error(error);
