@@ -34,6 +34,7 @@ app.use('/task', route_task);
 app.use('/test', route_test);
 app.use('/calendar', route_calendar);
 app.use(express.static('public'));
+app.use(express.static('videos'));
 
 app.listen(PORT, () => {
     console.log("running server");

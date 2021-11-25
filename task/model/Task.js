@@ -14,7 +14,30 @@ const task_schema = new mongoose.Schema({
     URL: {
         type: String,
         required: true
+    },
+    mouse_coods: {
+        URL: {
+            type: String,
+            required: True
+        },
+        mouse_coords: [{
+            X: {
+                type: Number,
+                required: true
+            },
+            Y: {
+                type: Number,
+                required: true
+            }
+        }]
     }
 });
+
+
+/* 
+
+    URL + task_id + clicks
+
+*/
 
 module.exports = mongoose.model("Task", task_schema);

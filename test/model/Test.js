@@ -29,16 +29,6 @@ const test_schema = new mongoose.Schema({
     end_time: {
         type: Date
     },
-    mouse_coords: [{
-        X: {
-            type: Number,
-            required: true
-        },
-        Y: {
-            type: Number,
-            required: true
-        }
-    }],
     video_url: {
         type: String
     }
