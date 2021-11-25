@@ -34,19 +34,25 @@
         </div>
         <div class="modal-body">
           <div id="registrationDiv">
-            <form id="project-form" request="/project">
+            <form id="project-form" request="project/">
               <div class="form-group">
                 <label for="name">Project Name:</label>
                 <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
               </div>
 
               <div class="form-group">
-                <label for="url">URL:</label>
-                <input type="url" class="form-control" id="url" placeholder="Enter Url" name="url">
+                <label for="organisation">Organisation:</label>
+                <input type="text" class="form-control" id="organisation" placeholder="Enter organisation"
+                  name="organisation">
+              </div>
+
+              <div class="form-group">
+                <label for="URL">URL:</label>
+                <input type="text" class="form-control" id="URL" placeholder="Enter Url" name="URL">
               </div>
               <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea class="form-control" id="description" rows="4" cols="50"
+                <textarea name="description" class="form-control" id="description" rows="4" cols="50"
                   placeholder="Brief Description"></textarea>
                 <!-- <textarea rows="4" cols="50" name="comment" form="usrform" placeholder="Brief Description">
                           </textarea> -->
@@ -123,22 +129,29 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
   <script> //$('.carousel').carousel(); 
-    var x = document.getElementById("addProject");
-    if (user_type != "observer/") {
-      console.log("sda");
-      $("#adminMode").hide();
-    }
+    // var x = document.getElementById("addProject");
+
     var user_email = sessionStorage.getItem('user_email')
     var user_type = sessionStorage.getItem('user_type')
     var server_address = sessionStorage.getItem('server_address')
     var token = sessionStorage.getItem('token')
     var url = "";
+
+
+
     if (user_type == "participant/") {
       url = server_address + user_type;
     } else {
       url = server_address;
     }
-    async function postFormDataAsJson({ url, formData }) {
+    if (user_type != "observer/") {
+      console.log("sda");
+      $("#adminMode").hide();
+    }
+
+
+
+    async function postFormDataAsJson(url, formData) {
       const plainFormData = Object.fromEntries(formData.entries());
       const formDataJsonString = JSON.stringify(plainFormData);
       console.log(formDataJsonString);
@@ -147,10 +160,11 @@
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": token
+          "Authorization": "token " + token
         },
         body: formDataJsonString,
       };
+      console.log(url);
       const response = await fetch(url, fetchOptions);
       if (!response.ok) {
         const errorMessage = await response.text();
@@ -174,10 +188,10 @@
       const form = event.currentTarget;
       request = form.getAttribute("request");
       const url_project = server_address + request;
-      console.log(url);
+      console.log(url_project);
       try {
         const formData = new FormData(form);
-        const responseData = await postFormDataAsJson({ url_project, formData });
+        const responseData = await postFormDataAsJson(url_project, formData);
         let responseObj = responseData;//= JSON.parse(responseData);
       } catch (error) {
         console.error(error);
@@ -186,42 +200,56 @@
     const projectForm = document.getElementById("project-form");
     projectForm.addEventListener("submit", handleSubmit);
     // /////////////var data = JSON.stringify({"email": user_email});
-    async function getProjects(url) {
 
+    async function getProjects(url) {
+      console.log(url);
       const fetchOptions = {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": token,
+          "Authorization": "token " + token
         }
 
       };
       try {
         let response = await fetch(url, fetchOptions);
+        console.log(response);
         return await response.json();
       } catch (err) {
         console.error(err);
       }
     }
-    var obj = getProjects(url + "/projects");
-    //var responseData = '[{"id":"1","name":"Project 1"}, {"id":"2", "name":"Project 2"}, {"id":"3", "name":"Project 3"}, {"id":"4", "name":"Project 4"}]';
-    //var obj = JSON.parse(responseData);
+    obj = "";
+    responseData = "";
+    let wraper = async function () {
+      responseData = await getProjects(url + "project");
+      console.log(responseData);
 
-    var tmp = '';
-    $.each(obj, function (key, value) {
-      tmp += '<a class="btn btn-outline-primary projectItem col-4" onClick="handleProjectSelect(' + value.id + ')">';
-      tmp += value.name
-      tmp += '</a>';
-    });
-    $('#projectList').prepend(tmp);
+      // var responseData = '[{"id":"1","name":"Project 1"}, {"id":"2", "name":"Project 2"}, {"id":"3", "name":"Project 3"}, {"id":"4", "name":"Project 4"}]';
+      obj = responseData;//= JSON.parse(responseData);
+      // console.log(responseData);
+      // console.log(obj);
+
+
+      var tmp = '';
+      $.each(obj, function (key, value) {
+        tmp += '<a class="btn btn-outline-primary projectItem col-4" onClick="handleProjectSelect(' + value._id + ')">';
+        tmp += value.name
+        tmp += '</a>';
+      });
+      $('#projectList').prepend(tmp);
+
+
+    }
+    wraper();
+
     function handleProjectSelect(id) {
-      //console.log(id,obj[id]);
-      sessionStorage.setItem('project_id', obj[id - 1].id);
+      // console.log(id, obj[id]);
+      sessionStorage.setItem('project_id', obj[id - 1]._id);
       sessionStorage.setItem('project_name', obj[id - 1].name);
       window.location.href = "projectdashboard.html";
     };
-    
   </script>
 </body>
 

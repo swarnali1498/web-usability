@@ -11,6 +11,15 @@ const {
     JWT_SECRET = 'secret ;P'
 } = process.env;
 
+router.get('/', verify_token, async (req, res) => {
+    try {
+        const projects = await Project.find();
+        console.log(projects);
+        res.json(projects);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 router.get('/:project_id/info', verify_token, async (req, res) => {
     try {
@@ -37,6 +46,7 @@ router.post('/', verify_token, async (req, res) => {
         const new_proj = await project.save();
         res.status(200).json(new_proj);
     } catch (err) {
+        console.log(req.body);
         res.status(500).json({ error: err.message });
     }
 });

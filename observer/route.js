@@ -21,6 +21,7 @@ router.get('/', verify_token, async (req, res) => {
         console.log(observers);
         res.json(observers);
     } catch (err) {
+        console.log(req.body);
         res.status(500).json({ message: err.message });
     }
 });

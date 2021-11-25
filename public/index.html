@@ -195,12 +195,13 @@
         if (responseObj["message"] == "valid participant") {
           sessionStorage.setItem('user_email', formData.get('email'));
           sessionStorage.setItem('user_type', user_type[x]);
-          sessionStorage.setItem('token', formData.get('token'));
+          sessionStorage.setItem('token', responseObj['sessionID']);
+          // console.log(responseObj['sessionID']);
           sessionStorage.setItem('server_address', server_address);
           window.location.href = server_address + "dashboard.html";
-        } else if(responseObj["message"] == "already exists"){
+        } else if (responseObj["message"] == "already exists") {
           alert("already exists");
-        }else{
+        } else {
           alert("User Added");
         }
       } catch (error) {
