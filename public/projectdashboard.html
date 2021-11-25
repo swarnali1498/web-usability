@@ -131,13 +131,13 @@
       console.error(err);
     }
   }
-  var responseList = await getResponse(url+"tasks/");
+  var taskList = await getResponse(url+"tasks/");
   var projectInfo = await getResponse(url+"info/");
   //var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
  // var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
   
-  var taskList = JSON.parse( responseList );
-  var project_info_object = JSON.parse( projectInfo )[0]
+  //var taskList = JSON.parse( responseList );
+  var project_info_object = projectInfo[0]
   var tmp = '';
   $.each( taskList, function( key, value ) {
     tmp += '<a class="btn btn-outline-primary projectItem col-4" onClick="handleTaskSelect('+value.id+')">';
@@ -204,8 +204,8 @@
       console.log(url);
       try {
         const formData = new FormData(form);
-        const responseData = await postFormDataAsJson({ url_task, formData });
-        let responseObj = JSON.parse(responseData);
+        const responseObj = await postFormDataAsJson({ url_task, formData });
+        //let responseObj = JSON.parse(responseData);
       } catch (error) {
         console.error(error);
       }

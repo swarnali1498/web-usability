@@ -198,33 +198,35 @@
           sessionStorage.setItem('token', formData.get('token'));
           sessionStorage.setItem('server_address', server_address);
           window.location.href = server_address + "dashboard.html";
-        } else {
-          alert("Invalid Details");
+        } else if(responseObj["message"] == "already exists"){
+          alert("already exists");
+        }else{
+          alert("User Added");
         }
       } catch (error) {
         console.error(error);
       }
     }
-    async function handleSubmitReg(event) {
-      event.preventDefault();
-      const form = event.currentTarget;
-      request = form.getAttribute("request");
-      const url = server_address + user_type[x] + request;
-      console.log(url);
-      try {
-        const formData = new FormData(form);
-        const responseData = await postFormDataAsJson({ url, formData });
-        console.log({ responseData });
-        // console.log(typeof (responseData));
-        // let responseObj = JSON.parse(responseData);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+    // async function handleSubmitReg(event) {
+    //   event.preventDefault();
+    //   const form = event.currentTarget;
+    //   request = form.getAttribute("request");
+    //   const url = server_address + user_type[x] + request;
+    //   console.log(url);
+    //   try {
+    //     const formData = new FormData(form);
+    //     const responseData = await postFormDataAsJson({ url, formData });
+    //     console.log({ responseData });
+    //     // console.log(typeof (responseData));
+    //     // let responseObj = JSON.parse(responseData);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
     const loginForm = document.getElementById("login-form");
     loginForm.addEventListener("submit", handleSubmit);
     const registerForm = document.getElementById("registration-form");
-    registerForm.addEventListener("submit", handleSubmitReg);
+    registerForm.addEventListener("submit", handleSubmit);
   </script>
 </body>
 

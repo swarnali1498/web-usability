@@ -153,8 +153,8 @@
     // var responseTestsList ='[{"participant_name":"Spider Man","start_time":"12/11/21, Monday"},{"participant_name":"Bat Man","start_time":"12/11/21, Monday"},{"participant_name":"Super Man","start_time":"12/11/21, Monday"}]'
     // var responseTaskInfo ='[{"URL":"www.iith.ac.in/taskpage", "description":"Perform some task. and work towards work-related goals. Achieve all project goals. "}]'
     
-    var task_info_object = JSON.parse( responseTaskInfo )[0]
-    var task_list_object = JSON.parse(responseTestsList);
+    var task_info_object = responseTestsList[0]
+    var task_list_object = taskInfo;
     tmp='';
     $.each( task_list_object, function(key, value) {
       //console.log(o);
