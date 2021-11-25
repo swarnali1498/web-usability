@@ -16,7 +16,7 @@ router.get('/', verify_token, async (req, res) => {
     try {
         const id = req.__id;
         const observers = await Observer.findOne({
-            __id: id
+            _id: id
         });
         console.log(observers);
         res.json(observers);
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
         }
         else {
             const data = {
-                id: observers[0]["__id"],
+                _id: observers[0]["_id"],
                 email: observers[0]["email"],
                 name: observers[0]["name"]
             };

@@ -15,7 +15,7 @@ router.get('/:task_id', verify_token, async (req, res) => {
     try {
         const id = req.params.task_id;
         const tasks = await Task.findOne({
-            __id: id
+            _id: id
         });
         res.json(tasks);
     } catch (err) {

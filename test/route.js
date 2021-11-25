@@ -65,7 +65,7 @@ router.post('/create', verify_token, async (req, res) => {
 router.put('/start/:id', verify_token, async (req, res) => {
     try {
         const test = await Test.findOne({
-            __id: req.params.id
+            _id: req.params.id
         });
         test.start_time = new Date();
         await test.save();
@@ -78,7 +78,7 @@ router.put('/start/:id', verify_token, async (req, res) => {
 router.put('/end/:id', verify_token, async (req, res) => {
     try {
         const test = await Test.findOne({
-            __id: req.params.id
+            _id: req.params.id
         });
         test.end_time = new Date();
         await test.save();
@@ -91,7 +91,7 @@ router.put('/end/:id', verify_token, async (req, res) => {
 router.put('/mouse_coords/:id', verify_token, async (req, res) => {
     try {
         const test = await Test.findOne({
-            __id: req.params.id
+            _id: req.params.id
         });
         test.mouse_coords = req.body.mouse_coords;
         await test.save();
@@ -104,7 +104,7 @@ router.put('/mouse_coords/:id', verify_token, async (req, res) => {
 router.put('/video_url/:id', verify_token, async (req, res) => {
     try {
         const test = await Test.findOne({
-            __id: req.params.id
+            _id: req.params.id
         });
         test.video_url = req.body.video_url;
         await test.save();

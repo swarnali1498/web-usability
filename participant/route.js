@@ -27,9 +27,9 @@ router.get('/', verify_token, async (req, res) => {
 
 router.get('/projects', verify_token, async (req, res) => {
     try {
-        const id = req.__id;
+        const id = req._id;
         const participant = await Participant.findOne({
-            __id: id
+            _id: id
         });
         console.log(participants);
         res.status(200).json({ data: participant["projects"] });
@@ -42,7 +42,7 @@ router.get('/projects', verify_token, async (req, res) => {
 //     try {
 //         const id = req.__id;
 //         const participants = await Participant.findOne({
-//             __id: id
+//             _id: id
 //         });
 
 //         console.log(participants);
@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
         }
         else {
             const data = {
-                id: participants[0]["__id"],
+                id: participants[0]["_id"],
                 email: req.body.email,
                 name: participants[0]["name"]
             };

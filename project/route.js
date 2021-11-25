@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const verify_token = require('../middleware/verify_token');
 const Project = require('./model/Project');
+const Task = require('../task/model/Task');
 
 const JWT = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -25,9 +26,9 @@ router.get('/:project_id/info', verify_token, async (req, res) => {
     try {
         const project_id = req.params.project_id;
         const project = await Project.findOne({
-            __id: project_id
+            _id: project_id
         });
-
+        // const project = await Project.find();
         res.json(project);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -55,7 +56,7 @@ router.get('/tasks/:project_id', verify_token, async (req, res) => {
     try {
         const project_id = req.params.project_id;
         const project = await Project.findOne({
-            __id: project_id
+            _id: project_id
         });
         res.status(200).json({ data: project["tasks"] });
     } catch (err) {
@@ -66,11 +67,18 @@ router.get('/tasks/:project_id', verify_token, async (req, res) => {
 router.post('/task/:project_id', verify_token, async (req, res) => {
     try {
         const project_id = req.params.project_id;
-        const task_id = req.body.task_id;
-        const projects = await Project.findOne({
-            __id: project_id
+        const task = new Task({
+            name: req.body.name,
+            description: req.body.description,
+            URL: req.body.URL
         });
-        projects["tasks"].push(task_id);
+        const new_task = await task.save();
+
+        const projects = await Project.findOne({
+            _id: project_id
+        });
+
+        projects["tasks"].push({ id: new_task.__id, name: new_task.name });
         projects.save();
         res.status(200).json({ message: "successfully added new task" });
     } catch (err) {
