@@ -176,7 +176,7 @@
       video_url = task_list_object[0]["video_url"];
       const test_info_object = await getResponse("test/" + test_id);
       console.log(test_info_object);
-      $("#remarks").html('<li>' + test_info_object["remark"] + '</li>');
+      $("#remark").val(test_info_object["remark"]);
     }
     var task_list_object = "";
     var task_info_object = "";
@@ -232,8 +232,7 @@
         formData.append("project_id", project_id);
         formData.append("task_id", task_id);
         const responseObj = await postFormDataAsJson(url_post, formData);
-        $("#remarks").append('<li>' + formData.get("remark") + '</li>');
-        $('#remark').val('');
+        $("#remark").val(formData.get("remark"));
         console.log(responseObj);
       } catch (error) {
         console.error(error);
@@ -256,6 +255,12 @@
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(errorMessage);
+      }else{
+        if (confirm("Participant Added!")) {
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
       }
       return response;
     }
