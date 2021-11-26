@@ -11,7 +11,7 @@ const test_schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    participant_id: {
+    participant_email: {
         type: String,
         required: true
     },
@@ -30,6 +30,9 @@ const test_schema = new mongoose.Schema({
         type: Date
     },
     video_url: {
+        type: String
+    },
+    remark: {
         type: String
     }
 });
