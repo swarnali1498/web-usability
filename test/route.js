@@ -26,7 +26,7 @@ router.get('/', verify_token, async (req, res) => {
 router.get('/:test_id', verify_token, async (req, res) => {
     try {
         const test = await Test.findOne({
-            _id: req.params.id
+            _id: req.params.test_id
         });
         res.status(200).json(test);
     } catch (err) {

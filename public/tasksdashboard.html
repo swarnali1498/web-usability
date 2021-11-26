@@ -170,15 +170,18 @@
         console.error(err);
       }
     }
-    function showTestStats(id) {
-      console.log(task_list_object);
-      $("#remarks").append('<li>' + task_list_object[id]["remark"] + '</li>');
-      video_url = task_list_object[id]["video_url"];
-      test_id = task_list_object[id]["_id"];
+    async function showTestStats(id) {
+      console.log(task_list_object[0]);
+      test_id = task_list_object[0]["_id"];
+      video_url = task_list_object[0]["video_url"];
+      const test_info_object = await getResponse("test/" + test_id);
+      console.log(test_info_object);
+      $("#remarks").html('<li>' + test_info_object["remark"] + '</li>');
     }
     var task_list_object = "";
     var task_info_object = "";
     const wraper = async function () {
+
       const responseTestsList = await getResponse(url);
       const taskInfo = await getResponse(server_address + "task/" + task_id);
 
