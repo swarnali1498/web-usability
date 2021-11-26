@@ -143,7 +143,7 @@
     var video_url = "";
     var test_id = "";
     url = "";
-
+    var modal = document.getElementById('task-stats')
     url = server_address + "test/";
 
     url = url + project_id + "/" + task_id;
@@ -166,6 +166,8 @@
       }
     }
     async function showTestStats(id) {
+     
+      new bootstrap.Modal(modal);
       console.log(task_list_object[0]);
       test_id = task_list_object[0]["_id"];
       video_url = task_list_object[0]["video_url"];
