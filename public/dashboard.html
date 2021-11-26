@@ -31,14 +31,14 @@
                 <div class="modal-header">
                     <h4>Add a Project</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> 
+                </div>
                 <div class="modal-body">
                     <div id="registrationDiv">
                         <form id="project-form" request="project/">
                             <div class="form-group">
                                 <label for="name">Project Name:</label>
                                 <input type="text" class="form-control" id="name" placeholder="Enter your name"
-                                    name="name"> 
+                                    name="name">
                             </div>
 
                             <div class="form-group">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
     <div class="modal fade calender-form" role="dialog" style="height:90vh;top:20px">
         <div class="modal-dialog modal-md">
@@ -74,14 +74,14 @@
                 <div class="modal-header">
                     <h4>Add An Event</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> 
+                </div>
                 <div class="modal-body">
                     <div id="registrationEvent">
                         <form id="calender-form" request="calendar/add_event/">
                             <div class="form-group">
-                                <label for="name">Summary:</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter your name"
-                                    name="name"> 
+                                <label for="summary">Summary:</label>
+                                <input type="text" class="form-control" id="summary" placeholder="Enter your name"
+                                    name="summary">
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
@@ -90,23 +90,25 @@
                                 <!-- <textarea rows="4" cols="50" name="comment" form="usrform" placeholder="Brief Description">
                                 </textarea> -->
                                 <!-- <input type="description" class="form-control" id="description"  name="description"> -->
-                            </div>    
+                            </div>
                             <div class="form-group">
                                 <label for="start">Start:</label>
-                                <input type="datetime-local" class="form-control" id="start" placeholder="Time" name="start">
-                              </div>
+                                <input type="datetime-local" class="form-control" id="start" placeholder="Time"
+                                    name="start">
+                            </div>
 
-                              <div class="form-group">
+                            <div class="form-group">
                                 <label for="end">End:</label>
-                                <input type="datetime-local" class="form-control" id="end" placeholder="Time" name="end">
-                              </div>
+                                <input type="datetime-local" class="form-control" id="end" placeholder="Time"
+                                    name="end">
+                            </div>
                             <hr>
                             <button type="submit" class="btn btn-primary me-2">Register</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
     <div id="contentPanel" class="row">
         <div class="col-9  justify-content-between">
@@ -151,7 +153,7 @@
                     <iframe
                         src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FKolkata&showPrint=0&showTz=0&showTabs=0&src=bWkybWwyb240bmc1MWEwNG4xa200c2l1MDhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=Nm50aWZzZjdyb25wZWc2dWlqMmFkaDg5OG9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%237CB342&color=%23AD1457"
                         style="border:solid 1px #777; height:100%; width:100%" frameborder="0" scrolling="no"></iframe>
-                    
+
                 </div>
             </div>
         </div>
@@ -236,10 +238,30 @@
             event.preventDefault();
             const form = event.currentTarget;
             request = form.getAttribute("request");
+
             const url_project = server_address + request;
-            console.log(url_project);
+            console.log(request);
             try {
                 const formData = new FormData(form);
+                // console.log(formData["summary"]);
+                // console.log(typeof (formData.summary));
+                // if (request == "calendar/add_event/") {
+                //     let new_form = formData;
+                //     new_form.summary = formData.summary;
+                //     new_form.description = formData.description;
+
+                //     new_form.start = {
+                //         "dateTime": Date(formData.start),
+                //         "timeZone": "Asia/Kolkata"
+                //     };
+                //     new_form.end = {
+                //         "dateTime": Date(formData.end),
+                //         "timeZone": "Asia/Kolkata"
+                //     };
+                //     // formData = new_form;
+                //     console.log(new_form);
+                // }
+
                 const responseData = await postFormDataAsJson(url_project, formData);
                 let responseObj = responseData;//= JSON.parse(responseData);
             } catch (error) {
@@ -270,7 +292,7 @@
             } catch (err) {
                 console.error(err);
             }
-        }   
+        }
         obj = "";
         responseData = "";
         let wraper = async function () {

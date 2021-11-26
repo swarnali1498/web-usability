@@ -55,9 +55,19 @@ const insertEvent = async (event) => {
 router.post('/add_event', verify_token, async (req, res) => {
     try {
         let event = req.body;
+        console.log(event);
 
-        event.start.dateTime = new Date(event.start.dateTime);
-        event.end.dateTime = new Date(event.end.dateTime);
+        event.start = {
+            "dateTime": new Date(event.start),
+            "timeZone": "Asia/Kolkata"
+        };
+
+        event.end = {
+            "dateTime": new Date(event.end),
+            "timeZone": "Asia/Kolkata"
+        };
+
+        console.log(event);
 
         let flag = await insertEvent(event);
 
