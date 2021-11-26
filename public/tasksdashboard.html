@@ -24,11 +24,19 @@
 
             </div>
             <div class="box col-4" style="height:70vh;">
-              <div id="remarks" class="box" style="height:60%;">
+              <div class="box" style="height:60%; overflow-y:scroll ;">
+                <ul id="remarks">
 
+                </ul>
               </div>
-              <div id="remarks" class="box" style="height:40%;">
-
+              <div id="add_remark" class="box" style="height:40%;">
+                <form id="remark-form">
+                  <div class="form-group">
+                    <textarea class="form-control" id="remark" rows="4" cols="50" name="remark"
+                      placeholder="Add a remark"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary me-2 py-2">Add</button>
+                </form>
               </div>
             </div>
           </div>
@@ -188,9 +196,53 @@
     wraper();
     // var responseTestsList ='[{"participant_name":"Spider Man","start_time":"12/11/21, Monday"},{"participant_name":"Bat Man","start_time":"12/11/21, Monday"},{"participant_name":"Super Man","start_time":"12/11/21, Monday"}]'
     // var responseTaskInfo ='[{"URL":"www.iith.ac.in/taskpage", "description":"Perform some task. and work towards work-related goals. Achieve all project goals. "}]'
-
-
     //$('#projectOrganization').prepend(task_info_object["organization"]);
+    
+    //TO BE ADDED!!!!!
+    
+      // var task_remarks_list = ['sonething sothong','other thing ','varioed varied','sppuerrrr'];
+    // $.each( task_remarks_list, function(index, value) {
+    //   $("#remarks").append('<li>' + value + '</li>');
+    // });
+    // const remarkForm = document.getElementById("remark-form");
+    // remarkForm.addEventListener("submit", handleSubmitRemark);
+
+    // /*async*/ function handleSubmitRemark(event) {
+    //   event.preventDefault();
+    //   const form = event.currentTarget;
+    //   //console.log(url_post);
+    //   try {
+    //     const formData = new FormData(form);
+    //     //const responseObj = await postFormDataAsJson(url_post, formData);
+    //     $("#remarks").append('<li>' + formData.get("remark") + '</li>');
+    //     $('#remark').val('')
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+    // async function postFormDataAsJson(url, formData) {
+    //   const plainFormData = Object.fromEntries(formData.entries());
+    //   const formDataJsonString = JSON.stringify(plainFormData);
+    //   console.log(formDataJsonString);
+    //   const fetchOptions = {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Accept": "application/json",
+    //       "Authorization": "token " + token
+    //     },
+    //     body: formDataJsonString,
+    //   };
+    //   const response = await fetch(url, fetchOptions);
+    //   if (!response.ok) {
+    //     const errorMessage = await response.text();
+    //     throw new Error(errorMessage);
+    //   } 
+    //   return response;
+    // }
+    
+    
+    
   </script>
 
 </body>
