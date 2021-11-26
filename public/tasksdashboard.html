@@ -30,7 +30,7 @@
                 </ul>
               </div>
               <div id="add_remark" class="box" style="height:40%;">
-                <form id="remark-form">
+                <form id="remark-form" request="test/remark/">
                   <div class="form-group">
                     <textarea class="form-control" id="remark" rows="4" cols="50" name="remark"
                       placeholder="Add a remark"></textarea>
@@ -66,20 +66,17 @@
         </div>
         <div class="modal-body">
           <div id="registrationDiv">
-            <form id="registration-form" request="/register">
+            <form id="participant-add-form" request="test/create/">
               <div class="form-group">
-                <label for="name">Project Name:</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name">
+                <label for="name">Participant Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email-name" name="email">
               </div>
               <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="description" class="form-control" id="description" placeholder="Brief Description"
-                  name="description">
+                <label for="time">Scheduled Time:</label>
+                <input type="datetime-local" class="form-control" id="time" placeholder="Time" name="time">
               </div>
-              <div class="form-group">
-                <label for="url">url:</label>
-                <input type="url" class="form-control" id="url" placeholder="Enter Url" name="url">
-              </div>
+  
+              
               <hr>
               <button type="submit" class="btn btn-primary me-2">Register</button>
             </form>
@@ -103,6 +100,10 @@
         <div class="row justify-content-between">
           <div class="col-3 ">
             <h4>Tests:</h4>
+          </div>
+          <div class="col-3"><button id="addParticipant"
+              class="projectItem btn me-5 btn-success align-self-end" type="submit" data-bs-toggle="modal"
+              data-bs-target=".project-register-form">+ Add Participant</button>
           </div>
         </div>
         <hr>
@@ -134,16 +135,18 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
   <script> //$('.carousel').carousel(); 
-    var user_email = sessionStorage.getItem('user_email')
-    var user_type = sessionStorage.getItem('user_type')
-    var server_address = sessionStorage.getItem('server_address')
-    var token = sessionStorage.getItem('token')
-    var project_id = sessionStorage.getItem('project_id')
-    var project_name = sessionStorage.getItem('project_name')
-    var task_id = sessionStorage.getItem('task_id')
-    var task_name = sessionStorage.getItem('task_name')
-    var task_description = sessionStorage.getItem('task_description')
-    var task_url = sessionStorage.getItem('task_url')
+    var user_email = sessionStorage.getItem('user_email');
+    var user_type = sessionStorage.getItem('user_type');
+    var server_address = sessionStorage.getItem('server_address');
+    var token = sessionStorage.getItem('token');
+    var project_id = sessionStorage.getItem('project_id');
+    var project_name = sessionStorage.getItem('project_name');
+    var task_id = sessionStorage.getItem('task_id');
+    var task_name = sessionStorage.getItem('task_name');
+    var task_description = sessionStorage.getItem('task_description');
+    var task_url = sessionStorage.getItem('task_url');
+    var video_url = "";
+    var test_id="";
     url = "";
 
     url = server_address + "test/";
@@ -167,6 +170,11 @@
         console.error(err);
       }
     }
+    function showTestStats(id){
+      $("#remarks").append('<li>' + task_list_object[id]["remark"] + '</li>');
+      video_url = task_list_object[id]["video_url"] ;
+      test_id = task_list_object[id]["_id"];
+    }
 
     const wraper = async function () {
       const responseTestsList = await getResponse(url);
@@ -180,12 +188,13 @@
       tmp = '';
       $.each(task_list_object, function (key, value) {
         //console.log(o);
-        tmp += '<button class="projectItem card btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#task-stats">';
+        var i = 0;
+        tmp += '<button class="projectItem card btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#task-stats" onclick="showTestStats('+ (i++) +')">';
         tmp += '<h6 class="card-title">' + value.participant_name + '</h6>';
         tmp += '<p class="card-text"><small class="text-muted">' + value.start_time + '</small></p>';
         tmp += '</button>';
       });
-
+     
       $('#taskList').prepend(tmp);
       $('#projectURL').prepend(task_info_object["URL"]);
       $('#projectDescription').prepend(task_info_object["description"]);
@@ -194,55 +203,75 @@
     }
 
     wraper();
+   
+    var task_remarks_list = ['sonething sothong','other thing ','varioed varied','sppuerrrr'];
+
+    const remarkForm = document.getElementById("remark-form");
+    remarkForm.addEventListener("submit", handleSubmitRemark);
+
+    async function handleSubmitRemark(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      request = form.getAttribute("request")
+      url_post = server_address + request;
+      if(request=="test/remark/"){
+        url_post = url_post + test_id;
+      }
+      try {
+        var formData = new FormData(form);
+        formData.append("project_id",project_id);
+        formData.append("task_id",task_id);
+        const responseObj = await postFormDataAsJson(url_post, formData);
+        $("#remarks").append('<li>' + formData.get("remark") + '</li>');
+        $('#remark').val('');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    async function postFormDataAsJson(url, formData) {
+      const plainFormData = Object.fromEntries(formData.entries());
+      const formDataJsonString = JSON.stringify(plainFormData);
+      console.log(formDataJsonString);
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "token " + token
+        },
+        body: formDataJsonString,
+      };
+      const response = await fetch(url, fetchOptions);
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      } 
+      return response;
+    }
+    
+    
+    
     // var responseTestsList ='[{"participant_name":"Spider Man","start_time":"12/11/21, Monday"},{"participant_name":"Bat Man","start_time":"12/11/21, Monday"},{"participant_name":"Super Man","start_time":"12/11/21, Monday"}]'
     // var responseTaskInfo ='[{"URL":"www.iith.ac.in/taskpage", "description":"Perform some task. and work towards work-related goals. Achieve all project goals. "}]'
-    //$('#projectOrganization').prepend(task_info_object["organization"]);
     
-    //TO BE ADDED!!!!!
-    
-      // var task_remarks_list = ['sonething sothong','other thing ','varioed varied','sppuerrrr'];
-    // $.each( task_remarks_list, function(index, value) {
-    //   $("#remarks").append('<li>' + value + '</li>');
+    // var task_info_object = JSON.parse( responseTaskInfo )[0];
+    // var task_list_object = JSON.parse(responseTestsList);
+    // tmp='';
+    // var i=0;
+    // $.each( task_list_object, function(key, value) {
+    //   //console.log(o);
+    //   tmp += '<button class="projectItem card btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#task-stats" onclick="showTestStats('+ (i++) +')">';
+    //   tmp +=       '<h6 class="card-title">'+value.participant_name+'</h6>';
+    //   tmp +=       '<p class="card-text"><small class="text-muted">'+value.start_time+'</small></p>';
+    //   tmp += '</button>';
     // });
-    // const remarkForm = document.getElementById("remark-form");
-    // remarkForm.addEventListener("submit", handleSubmitRemark);
+   
+   
 
-    // /*async*/ function handleSubmitRemark(event) {
-    //   event.preventDefault();
-    //   const form = event.currentTarget;
-    //   //console.log(url_post);
-    //   try {
-    //     const formData = new FormData(form);
-    //     //const responseObj = await postFormDataAsJson(url_post, formData);
-    //     $("#remarks").append('<li>' + formData.get("remark") + '</li>');
-    //     $('#remark').val('')
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
-    // async function postFormDataAsJson(url, formData) {
-    //   const plainFormData = Object.fromEntries(formData.entries());
-    //   const formDataJsonString = JSON.stringify(plainFormData);
-    //   console.log(formDataJsonString);
-    //   const fetchOptions = {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Accept": "application/json",
-    //       "Authorization": "token " + token
-    //     },
-    //     body: formDataJsonString,
-    //   };
-    //   const response = await fetch(url, fetchOptions);
-    //   if (!response.ok) {
-    //     const errorMessage = await response.text();
-    //     throw new Error(errorMessage);
-    //   } 
-    //   return response;
-    // }
-    
-    
-    
+    // $('#taskList').prepend(tmp);
+    // $('#projectURL').prepend(task_info_object["URL"]);
+    // $('#projectDescription').prepend(task_info_object["description"]);
+    // $('#projectName').prepend(project_name+"/ "+task_name);
   </script>
 
 </body>
