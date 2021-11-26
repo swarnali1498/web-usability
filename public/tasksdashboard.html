@@ -24,12 +24,7 @@
 
             </div>
             <div class="box col-4" style="height:70vh;">
-              <div class="box" style="height:60%; overflow-y:scroll ;">
-                <ul id="remarks">
-
-                </ul>
-              </div>
-              <div id="add_remark" class="box" style="height:40%;">
+              <div id="add_remark" class="box" style="height:100%;">
                 <form id="remark-form" request="test/remark/">
                   <div class="form-group">
                     <textarea class="form-control" id="remark" rows="4" cols="50" name="remark"
@@ -195,7 +190,7 @@
         //console.log(o);
         var i = 0;
         console.log(value);
-        tmp += '<button class="projectItem col-6 card btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#task-stats" onclick="showTestStats(' + (i++) + ')">';
+        tmp += '<button class="projectItem card btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#task-stats" onclick="showTestStats(' + (i++) + ')">';
         tmp += '<h6 class="card-title">' + value["participant_email"] + '</h6>';
         tmp += '<p class="card-text"><small class="text-muted">' + value["sched_time"] + '</small></p>';
         tmp += '</button>';
