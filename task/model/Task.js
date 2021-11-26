@@ -15,21 +15,21 @@ const task_schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    mouse_coods: {
+    mouse_coords: [{
         URL: {
             type: String
         },
         mouse_coords: [{
-            X: {
-                type: Number
-            },
-            Y: {
-                type: Number
-            }
+            type: Number
         }]
-    }
+    }]
 });
 
+// [
+//     {URL:"serc.com/index.html", mouse_coods: [{1, 2}, {1, 3}]},
+//     {URL:"serc.com/people.html", mouse_coods: [{1, 2}, {1, 3}]},
+//     {URL:"serc.com/faculty.html", mouse_coods: [{1, 2}, {1, 3}]}    
+// ]
 
 /* 
 
