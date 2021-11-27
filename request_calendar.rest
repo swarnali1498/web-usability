@@ -1,0 +1,16 @@
+POST http://localhost:3000/calendar/add_event
+Content-Type: application/json
+Authorization: token xxx
+
+{
+    "summary": "Test - User100 on Project1",
+    "description": "This is the desasdasdcription.",
+    "start": {
+        "dateTime": "Wed Nov 10 2021 06:31:00 GMT+0530 (India Standard Time)",
+        "timeZone": "Asia/Kolkata"
+    },
+    "end": {
+        "dateTime": "2021-11-15T12:32:02.598Z",
+        "timeZone": "Asia/Kolkata"
+    }
+}
