@@ -34,7 +34,7 @@ async function startRecording() {
     const link = document.createElement('a');
     link.href = video.src;
     count = count + 1;
-    link.download = count.toString() + ".webm";
+    link.download = test_id + ".webm";
     link.click();
     localStorage.setItem("url", link.href);
   };
@@ -43,18 +43,14 @@ async function startRecording() {
 
 
 /* 
- 
 POST /test/end/{test_id}
+
 { 
-    start_time: Date()
-    end_time: Date()
-    mouse_coords:{
-      URL: Task.URL,
-      mouse_coords: [1, 2, 3, 4, 5, 6, ...]
-    }
+    start_time: Date(),
+    end_time: Date(),
+    URL: Task.URL,
+    mouse_coords: [1, 2, 3, 4, 5, 6, ...]
 }
-POST 
- 
 */
 start.addEventListener("click", () => {
   start.setAttribute("disabled", true);
