@@ -107,6 +107,7 @@
     var project_name = sessionStorage.getItem('project_name')
     var task_id = sessionStorage.getItem('task_id')
     var task_name = sessionStorage.getItem('task_name')
+    var task_url = "";
     url = "";
 
     url = server_address + "task/" + task_id;
@@ -136,7 +137,7 @@
       var task_info_object = responseTaskInfo
 
       console.log(task_info_object);
-
+      task_url = task_info_object["URL"];
       $('#taskURL').prepend(task_info_object["URL"]);
       $('#taskDescription').prepend(task_info_object["description"]);
 
