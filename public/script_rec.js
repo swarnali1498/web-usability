@@ -65,10 +65,10 @@ start.addEventListener("click", () => {
       let x = ev.layerX
       let y = ev.layerY
 
-      cord.push(x,y)
+      mouse_coorinates.push(x,y)
 
       console.log(x,y);
-      console.log(cord)
+      console.log(mouse_coorinates)
       console.log(window.location.href)
   }
 });
