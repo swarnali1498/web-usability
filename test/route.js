@@ -137,43 +137,27 @@ router.post('/create', verify_token, async (req, res) => {
     }
 });
 
-// router.post('/start/:id', verify_token, async (req, res) => {
-//     try {
-//         const test = await Test.findOne({
-//             _id: req.params.id
-//         });
-//         test.start_time = new Date();
-//         await test.save();
-//         res.status(200).json({ message: "Started the test" });
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// });
+router.post('/start/:id', verify_token, async (req, res) => {
+    try {
+        const test = await Test.findOne({
+            _id: req.params.id
+        });
+        test.start_time = new Date();
+        await test.save();
+        res.status(200).json({ message: "Started the test" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 router.post('/end/:id', verify_token, async (req, res) => {
     try {
         const test = await Test.findOne({
             _id: req.params.id
         });
-        test.start_time = req.body.start_time;
-        test.end_time = req.body.start_time;
-
-        const task = await Task.findOne({
-            _id: test.task_id
-        });
-
-        task.mouse_coords.push({
-            URL: req.body.URL,
-            mouse_coords: req.body.mouse_coords
-        });
-
+        test.end_time = new Date();
         await test.save();
-        await task.save();
-
-        console.log(test);
-        console.log(task);
-
-        res.status(200).json({ message: "Ended the test, updated the data" });
+        res.status(200).json({ message: "Ended the test" });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

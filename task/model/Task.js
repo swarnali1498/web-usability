@@ -26,9 +26,9 @@ const task_schema = new mongoose.Schema({
 });
 
 // [
-//     {URL:"serc.com/index.html", mouse_coods: [1, 2, 1, 3]},
-//     {URL:"serc.com/people.html", mouse_coods: [1, 2, 1, 3]},
-//     {URL:"serc.com/faculty.html", mouse_coods: [1, 2, 1, 3]}    
+//     {URL:"serc.com/index.html", mouse_coods: [{1, 2}, {1, 3}]},
+//     {URL:"serc.com/people.html", mouse_coods: [{1, 2}, {1, 3}]},
+//     {URL:"serc.com/faculty.html", mouse_coods: [{1, 2}, {1, 3}]}    
 // ]
 
 /* 

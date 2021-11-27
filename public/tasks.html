@@ -36,39 +36,35 @@
           <p id="taskDescription"></p>
         </div>
         <div id="start-button" class="modal-footer">
-          <button type="button" id="start" class="btn btn-primary" data-bs-dismiss="modal"
-            aria-label="Close">Start</button>
+          <button type="button" id="start" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Start</button>
         </div>
       </div>
     </div>
   </div>
   <div id="frame" class="h-90 box row justify-content-start">
 
-    <iframe id="iframes" width="100%" frameborder="100" marginheight="1000" marginwidth="100" height="1000px"
-      src="index1.html"></iframe>
+    <iframe id="iframes" width="100%" frameborder="100" marginheight="1000" marginwidth="100" height="1000px" src="index1.html"></iframe>
     <!-- <iframe width="100%" frameborder="0" marginheight="0" marginwidth="0" height="1700px" src="https://www.geeksforgeeks.org/?igu=1"></iframe> -->
-
-    <button id="show" disabled onclick="play_from_localstorage()">Show Recording</button>
-    <br>
-    <video width="400" height="400" controls>
+     
+     <button id="show" disabled onclick="play_from_localstorage()">Show Recording</button>
+     <br>
+     <video width="400" height="400" controls >
       <script type="module" src="https://unpkg.com/x-frame-bypass"></script>
       <script type="text/javascript">
-
-        $(document).ready(function () {
-          setTimeout(() => {
-            // console.log("HELLO")
-            let iframeElement = document.getElementById('iframes');
-            iframeElement.contentWindow.document.onclick = (e) => {
-              console.log(e.offsetX + e.view.scrollX, e.offsetY + e.view.scrollY);
-              console.log(e.view.outerWidth + e.view.scrollX, e.view.outerHeight + e.view.scrollY);
-            };
-          }, 500)
-        });
-
-      </script>
-  </div>
-
-  </div>
+   
+               $(document).ready(function(){
+               setTimeout(()=>{
+               // console.log("HELLO")
+               let iframeElement = document.getElementById('iframes');
+               iframeElement.contentWindow.document.onclick=(e) => { console.log(e.offsetX+e.view.scrollX, e.offsetY+e.view.scrollY);
+                 console.log( e.view.outerWidth+e.view.scrollX,e.view.outerHeight+e.view.scrollY); };
+               },500)
+               });
+   
+           </script>
+       </div>
+       
+       </div>
   <!-- <footer id="footer">
     <div class="container-fluid">
       <div class="row-fluid" style="margin-top: 20px;font-size: 13px;">
@@ -111,7 +107,7 @@
     var project_name = sessionStorage.getItem('project_name')
     var task_id = sessionStorage.getItem('task_id')
     var task_name = sessionStorage.getItem('task_name')
-    var test_id = sessionStorage.getItem('test_id')
+    var task_url = "";
     url = "";
 
     url = server_address + "task/" + task_id;
@@ -141,14 +137,14 @@
       var task_info_object = responseTaskInfo
 
       console.log(task_info_object);
-
+      task_url = task_info_object["URL"];
       $('#taskURL').prepend(task_info_object["URL"]);
       $('#taskDescription').prepend(task_info_object["description"]);
 
     }
     wraper();
   </script>
-  <script src="script_rec.js"></script>
+ <script src="script_rec.js"></script>
 </body>
 
 </html>
