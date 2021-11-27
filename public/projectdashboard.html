@@ -97,7 +97,7 @@
     <div class="container-fluid">
       <div class="row-fluid" style="margin-top: 20px;font-size: 13px;">
         <div class="container">
-          <div class="copyright">© <span id="copyright-year">2021-2022</span> Software Engineering Research Center
+          <div class="copyright">Â© <span id="copyright-year">2021-2022</span> Software Engineering Research Center
             (SERC), IIIT-Hyderabad.</div>
         </div>
       </div>
@@ -148,7 +148,9 @@
       };
       try {
         let response = await fetch(url, fetchOptions);
-        return await response.json();
+        response = await response.json();
+        console.log(response);
+        return response;
       } catch (err) {
         console.error(err);
       }
@@ -156,10 +158,13 @@
     var taskList;
     var projectInfo;
     let wraper = async function () {
+      var tmp_url = server_address + "project/" + project_id + "/info";
+      console.log(tmp_url);
+      var projectInfo = await getResponse(tmp_url);
+
       console.log(url_get);
       taskList = await getResponse(url_get);
-      console.log(taskList);
-      var projectInfo = await getResponse(server_address + "project/" + project_id + "/info/");
+      console.log(projectInfo);
 
       var project_info_object = projectInfo;
       var tmp = '';
@@ -171,7 +176,7 @@
         console.log(value);
       });
       $('#taskList').prepend(tmp);
-
+      console.log(project_info_object);
       $('#projectName').prepend(project_name);
       $('#projectOrganization').prepend(project_info_object["organization"]);
       $('#projectURL').prepend(project_info_object["URL"]);

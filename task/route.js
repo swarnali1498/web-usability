@@ -52,7 +52,7 @@ router.post('/', verify_token, async (req, res) => {
 
 router.post('/mouse_coords/:task_id', verify_token, async (req, res) => {
     try {
-        console.log(typeof (req.body.mouse_coords));
+        console.log(req.body.mouse_coords);
         const task = await Task.findOne({
             _id: req.params.task_id
         });

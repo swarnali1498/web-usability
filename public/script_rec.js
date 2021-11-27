@@ -85,15 +85,16 @@ stop.addEventListener("click", async () => {
   recorder.stop();
   stream.getVideoTracks()[0].stop();
   var end_time = new Date();
+  var url_post = server_address + "task/mouse_coords/" + task_id;
   try {
-    const formData = new FormData();
+    const form = new FormData();
     let mouse_obj = {};
     mouse_obj["URL"] = task_url;
     mouse_obj["mouse_coords"] = mouse_coorinates;
     form.append("start_time", start_time);
     form.append("end_time", end_time);
     form.append("mouse_coords", mouse_obj);
-    const responseObj = await postFormDataAsJson(url_post, formData);
+    const responseObj = await postFormDataAsJson(url_post, form);
   } catch (error) {
     console.error(error);
   }
