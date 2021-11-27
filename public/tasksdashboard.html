@@ -170,6 +170,7 @@
       new bootstrap.Modal(modal);
       console.log(task_list_object[0]);
       test_id = task_list_object[0]["_id"];
+      sessionStorage.setItem('test_id', test_id);
       video_url = task_list_object[0]["video_url"];
       const test_info_object = await getResponse("test/" + test_id);
       console.log(test_info_object);
