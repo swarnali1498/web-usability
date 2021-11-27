@@ -111,7 +111,7 @@
     var project_name = sessionStorage.getItem('project_name')
     var task_id = sessionStorage.getItem('task_id')
     var task_name = sessionStorage.getItem('task_name')
-    var test_id = sessionStorage.getItem('test_id')
+    var test_id = "";
     var task_url = "";
     url = "";
 
@@ -136,11 +136,11 @@
     }
     const wraper = async function () {
       const responseTaskInfo = await getResponse(url);
-
-      // var responseTaskInfo ='[{"URL":"www.iith.ac.in/taskpage", "description":"Perform some task. and work towards work-related goals. Achieve all project goals. "}]'
-
+      const responseTestsList = await getResponse(server_address + "test/" + project_id + "/" + task_id);
+      
       var task_info_object = responseTaskInfo
-
+      var task_list_object = responseTestsList
+      test_id = task_list_object[0]["_id"];
       console.log(task_info_object);
       task_url = task_info_object["URL"];
       $('#taskURL').prepend(task_info_object["URL"]);
