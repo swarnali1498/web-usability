@@ -2,6 +2,7 @@
 const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const video = document.querySelector("video");
+var task_url = sessionStorage.getItem('task_url');
 var start_time = new Date();
 var mouse_coorinates = [];
 let recorder, stream;
@@ -77,7 +78,7 @@ start.addEventListener("click", () => {
   }
 });
 
-stop.addEventListener("click", () => {
+stop.addEventListener("click", async () => {
   stop.setAttribute("disabled", true);
   start.removeAttribute("disabled");
   show.removeAttribute("disabled");
