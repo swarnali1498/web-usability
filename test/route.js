@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const verify_token = require('../middleware/verify_token');
 const Test = require('./model/Test');
+const Participant = require('../participant/model/Participant');
+const Project = require('../project/model/Project');
+const Task = require('../task/model/Task');
 
 const JWT = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -93,6 +96,39 @@ router.post('/create', verify_token, async (req, res) => {
         });
 
         const new_test = await test.save();
+
+        const part = await Participant.findOne({
+            email: req.body.participant_email,
+        });
+
+        const proj = await Project.findOne({
+            _id: req.body.project_id
+        });
+
+        const task = await Task.findOne({
+            _id: req.body.task_id
+        });
+
+        part.projects.push(
+            {
+                id: req.body.project_id,
+                name: proj.name,
+            }
+        );
+        part.tests.push(
+            {
+                id: test._id
+            }
+        );
+        part.tasks.push(
+            {
+                project_id: req.body.project_id,
+                id: req.body.task_id,
+                name: task.name
+            }
+        );
+        await part.save();
+
         console.log("Test created");
         console.log(new_test);
         res.status(200).json(new_test);

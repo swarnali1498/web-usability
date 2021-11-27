@@ -128,7 +128,7 @@
     */
 
     if (user_type == "participant/") {
-      url_get = server_address + "tasks/" + user_type + project_id;
+      url_get = server_address + user_type + "project/" + project_id + "/tasks";
     } else {
       url_post = server_address + "project/task/" + project_id;
       url_get = server_address + "project/tasks/" + project_id;
@@ -156,9 +156,11 @@
     var taskList;
     var projectInfo;
     let wraper = async function () {
+      console.log(url_get);
       taskList = await getResponse(url_get);
       console.log(taskList);
       var projectInfo = await getResponse(server_address + "project/" + project_id + "/info/");
+
       var project_info_object = projectInfo;
       var tmp = '';
       var i = 0;
@@ -181,7 +183,7 @@
     //var taskList = JSON.parse( responseList );
 
     function handleTaskSelect(id) {
-      console.log(id);
+
       sessionStorage.setItem('task_id', taskList["data"][id].id);
       sessionStorage.setItem('task_name', taskList["data"][id].name);
       if (user_type != "observer/") {

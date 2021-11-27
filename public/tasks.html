@@ -114,13 +114,15 @@
 
       // var responseTaskInfo ='[{"URL":"www.iith.ac.in/taskpage", "description":"Perform some task. and work towards work-related goals. Achieve all project goals. "}]'
 
-      var task_info_object = responseTaskInfo[0]
+      var task_info_object = responseTaskInfo
+
+      console.log(task_info_object);
 
       $('#taskURL').prepend(task_info_object["URL"]);
       $('#taskDescription').prepend(task_info_object["description"]);
 
     }
-
+    wraper();
   </script>
 
 </body>

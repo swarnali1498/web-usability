@@ -16,7 +16,7 @@ router.get('/', verify_token, async (req, res) => {
     try {
         const projects = await Project.find();
         console.log(projects);
-        res.json(projects);
+        res.json([projects]);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

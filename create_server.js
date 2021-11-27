@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const fileUpload = require('express-fileupload');
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ const route_project = require('./project/route');
 const route_task = require('./task/route');
 const route_test = require('./test/route');
 const route_calendar = require('./calendar/route');
+// const route_video = require('./video/route');
 
 app.use('/participant', route_participant);
 app.use('/observer', route_observer);
@@ -33,8 +35,9 @@ app.use('/project', route_project);
 app.use('/task', route_task);
 app.use('/test', route_test);
 app.use('/calendar', route_calendar);
+// app.use('/video', route_video);
 app.use(express.static('public'));
-app.use(express.static('videos'));
+// app.use(express.static('videos'));
 
 app.listen(PORT, () => {
     console.log("running server");

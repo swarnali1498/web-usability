@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const verify_token = require('../middleware/verify_token');
 const Participant = require('./model/Participant');
+// const Test = require('../test/model/Test');
 
 const JWT = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -25,33 +26,34 @@ router.get('/', verify_token, async (req, res) => {
 });
 
 
-router.get('/projects', verify_token, async (req, res) => {
+router.get('/project', verify_token, async (req, res) => {
     try {
         const id = req._id;
-        const participant = await Participant.findOne({
+        const participant = await Participant.find({
             _id: id
         });
-        console.log(participants);
-        res.status(200).json({ data: participant["projects"] });
+        console.log(participant[0]);
+        res.status(200).json([participant[0]["projects"]]);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
 
-// router.get('/projects/:project_id/tasks', verify_token, async (req, res) => {
-//     try {
-//         const id = req.__id;
-//         const participants = await Participant.findOne({
-//             _id: id
-//         });
+router.get('/project/:project_id/tasks', verify_token, async (req, res) => {
+    try {
+        const id = req._id;
 
-//         console.log(participants);
-//         res.status(200).json({ data: participant["projects"] });
+        const participants = await Participant.find({
+            _id: id
+        });
 
-//     } catch (err) {
-//         res.status(500).json({ message: err.message });
-//     }
-// });
+        console.log(participants);
+        res.status(200).json({ data: participants[0]["tasks"] });
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 
 router.post('/login', async (req, res) => {
@@ -70,7 +72,7 @@ router.post('/login', async (req, res) => {
         }
         else {
             const data = {
-                id: participants[0]["_id"],
+                _id: participants[0]["_id"],
                 email: req.body.email,
                 name: participants[0]["name"]
             };

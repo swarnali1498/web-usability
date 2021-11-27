@@ -33,6 +33,20 @@ const participant_schema = new mongoose.Schema({
             required: true
         }
     }],
+    tasks: [{
+        project_id: {
+            type: String,
+            required: true
+        },
+        id: {
+            type: String,
+            required: true
+        },
+        name: {
+            type: String,
+            required: true
+        }
+    }],
     tests: [{
         id: {
             type: String,
