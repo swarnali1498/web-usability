@@ -27,7 +27,7 @@ const route_project = require('./project/route');
 const route_task = require('./task/route');
 const route_test = require('./test/route');
 const route_calendar = require('./calendar/route');
-const route_video = require('./video/route');
+// const route_video = require('./video/route');
 
 app.use('/participant', route_participant);
 app.use('/observer', route_observer);
@@ -37,7 +37,7 @@ app.use('/test', route_test);
 app.use('/calendar', route_calendar);
 // app.use('/video', route_video);
 app.use(express.static('public'));
-// app.use(express.static('videos'));
+app.use(express.static('video'));
 
 app.listen(PORT, () => {
     console.log("running server");
