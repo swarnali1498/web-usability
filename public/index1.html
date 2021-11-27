@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SERC | IIIT Hyderabad</title>
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+	<link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" href="styles/animate.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="scripts/script.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="header-div">
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header logo-div" data-wow-duration="2s">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">SERC</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#About_Us">About Us</a></li>
+        <li><a href="#Focus_Area">Focus Area</a></li>
+        <li><a href="#People">People</a></li>
+		<li><a href="#Resources">Resources</a></li>
+        <li><a href="#Contact">Contact Us</a></li>
+		<li><a href="#Publications">Publications</a></li>
+		<li><a href="#News/Updates">News/Updates</a></li>
+		<li><button id="admin" onclick="fun()">Admin Mode</button></li>
+		<li><button id="leave_admin" onclick="leave_admin_mode()">Leave Admin Mode</button></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container wow bounceInDown" data-wow-duration="2s">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 text-center slide-text serc">
+			<img src="https://mma.prnewswire.com/media/600789/IIIT_Hyderabad_Logo.jpg" width="700px" height="300px" alt="IIIT Hyderabad">
+			<h2>Software Engineering Research Center</h2>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<div class="container" id="About_Us">
+	<div class="row">
+		<div class="main_heading">
+			<h1>About Us</h1>
+			<div class="text-center"><span class="underline"></span></div>
+			<button id="hide1" onclick="hide_page1()">Hide Page</button>
+			<button id="show1" onclick="show_page1()">Show Page</button>
+			<button id="edit_btn" onclick="edit()">Edit Page</button>
+			<button id="save_btn" onclick="save()">Save Page</button>
+		</div>
+	</div>
+	
+	<div>
+		<div id="show_about_us" class="features-div">
+		   <p>Software Engineering Research Center(SERC) has a eminent faculty with vast teaching and research experience in and outside India. Some of the key focus areas:
+				<br><br>
+				1) Empirical Research and Process Improvement
+				<br>	
+				2) Formal Methods in Software Engineering
+				<br>
+				3) Requirements Engineering and Quality Attributes
+				<br>
+				4) Complex System Development
+				<br>
+				5) Cloud Computing
+				<br>
+				6) Education Technologies
+				<br>
+				7) Usability Engineering
+				<br><br>
+				SERC has close collaboration with industry providing software services to large organizations, R&D labs of various organizations and other academic institutes (India and abroad). Organizations that SERC is working are diverse, stratified across banking and finance, government, equipment manufacture, ISVs building products for software industry, etc.
+			</p>
+		</div>
+		<textarea id="edit_about_us"></textarea>
+	</div>
+	<div class="features-div">
+		<div id="hide_about_us">
+			<center>
+				<p>This page cannot be displayed</p>
+			</center>
+		</div>
+	</div>
+</div>
+
+<div class="container" id="Focus_Area">
+	<div class="row">
+		<div class="main_heading">
+			<h1>Focus Area</h1>
+		<div  class="text-center"><span class="underline"></span></div>
+		<button id="hide2" onclick="hide_page2()">Hide Page</button>
+		<button id="show2" onclick="show_page2()">Show Page</button>
+	</div>
+	<div id="show_focus_area" class="features-div">
+		<div class="sub_heading">
+			<h3>Research Areas</h3>
+		</div>
+		<ul>
+			<li><p>Usability Engineering</p></li>
+			<li><p>Semantic Web Architectures</p></li>
+			<li><p>Distributed Systems and Cloud Computing</p></li>
+			<li><p>Software Quality Engineering</p></li>
+			<li><p>Mining S/W Architectures</p></li>
+			<li><p>Compilers and Programming Languages</p></li>
+			<li><p>Mathematical Computer Science and Formal Methods</p></li>
+			<li><p>Model Driven Development</p></li>
+			<li><p>S/W Engineering Education</p></li>
+			<li><p>Technology for Education</p></li>
+		</ul>
+	</div>
+</div>
+<div class="features-div">
+	<div id="hide_focus_area">
+		<center>
+			<p>This page cannot be displayed</p>
+		</center>
+	</div>
+</div>
+
+<div class="container" id="People">
+	<div class="row">
+		<div class="main_heading">
+			<h1>People</h1>
+		<div class="text-center"><span class="underline"></span></div>
+		<button id="hide3" onclick="hide_page3()">Hide Page</button>
+		<button id="show3" onclick="show_page3()">Show Page</button>
+	</div>
+	<div id="show_people" class="features-div">
+		<ul>
+		<li><a href="#" onclick="show_faculty()">Faculty</a></li>
+		<div id="Faculty">
+			<hr class="compact-hr">
+				<h4>Full Time</h4>
+				<div class="row">
+					<div class="col-xs-3">
+						<a><img src="https://serc.iiit.ac.in/static/images/people/6.jpg" alt=""></a>
+						<h4><a href="#">Raghu Reddy</a></h4>
+						<span>Associate Professor &amp; Head</span>
+						<div class="accordion">
+							<dl>
+								<dt>
+									<a href="#" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger" style="padding: 2px 12px;"> Research Interests</a>
+								</dt>
+								<dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+									<ul>
+	<li>Model Driven Development</li>
+	<li>Software Requirements and Architecture</li>
+	<li>Verification & Validation</li>
+	<li>Usability and Software engineering education</li>
+	</ul>
+								</dd>
+							</dl>
+						</div>
+						
+					</div>
+					
+					<div class="col-xs-3">
+						
+							<a><img src="https://serc.iiit.ac.in/static/images/people/Venkatesh_Choppella.jpg" alt=""></a>
+						
+						<h4>
+							
+								<a>Venkatesh Choppella</a>
+							
+						</h4>
+						
+						<span>Associate Professor</span>
+						
+						
+						<div class="accordion">
+							<dl>
+								<dt>
+									<a href="#" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger" style="padding: 2px 12px;"> Research Interests</a>
+								</dt>
+								<dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+									<ul>
+	<li>Programming Languages</li>
+	<li>S/W Architectures</li>
+	<li>Formal Methods</li>
+	<li>CS Education</li>
+	</ul>
+								</dd>
+							</dl>
+						</div>
+						
+					</div>
+					
+					<div class="col-xs-3">
+						
+							<a><img src="https://serc.iiit.ac.in/static/images/people/DSC_0320.jpg" alt=""></a>
+						
+						<h4>
+							
+								<a>Vasudeva Varma</a>
+							
+						</h4>
+						
+						<span>Professor &amp; Dean (Research)</span>
+						
+						
+						<div class="accordion">
+							<dl>
+								<dt>
+									<a href="#" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger" style="padding: 2px 12px;"> Research Interests</a>
+								</dt>
+								<dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+									<ul>
+	<li>Information Retrieval</li>
+	<li>Social Media Analysis</li>
+	<li>Semantic Search</li>
+	<li>Cloud Computing and Software Engineering</li>
+	</ul>
+								</dd>
+							</dl>
+						</div>
+						
+					</div>
+					
+					<div class="col-xs-3">
+						
+							<a><img src="https://serc.iiit.ac.in/static/images/people/Ramesh.jpg" height=162px; width=180px; alt=""></a>
+						
+						<h4>
+							
+								<a>Ramesh Loganathan</a>
+							
+						</h4>
+						
+						<span>PROFESSOR CO-INNOVATION</span>
+						
+						
+						<div class="accordion">
+							<dl>
+								<dt>
+									<a href="#" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger" style="padding: 2px 12px;"> Research Interests</a>
+								</dt>
+								<dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+									<ul>
+	<li>Innovation and Processes for Applied Research</li>
+	</ul>
+								</dd>
+							</dl>
+						</div>
+						
+					</div>
+					
+				</div>
+				<hr class="compact-hr">
+			
+				<h4>Distinguished/Adjunct/Visiting</h4>
+				<div class="row">
+					
+					<div class="col-xs-3">
+						
+							<a><img src="https://serc.iiit.ac.in/static/images/people/nori.jpg" height=162px; width=180px; alt=""></a>
+						
+						<h4>
+							
+								<a>Kesav V. Nori</a>
+							
+						</h4>
+						
+						<span>Distinguished Professor</span>
+						
+						
+						<div class="accordion">
+							<dl>
+								<dt>
+									<a href="#" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger" style="padding: 2px 12px;"> Research Interests</a>
+								</dt>
+								<dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+									<ul>
+	<li>Computer Science Education</li>
+	<li>Software Archtiecture</li>
+	<li>Compilers</li>
+	<li>Technology for Education</li>
+	</ul>
+								</dd>
+							</dl>
+						</div>
+						
+					</div>
+					
+					<div class="col-xs-3">
+						
+							<a><img src="https://serc.iiit.ac.in/static/images/people/Viswanath_Kasturi_bGLSrXt.JPG" height=162px; width=180px; alt=""></a>
+						
+						<h4>
+							
+								<a>Viswanath Kasturi</a>
+							
+						</h4>
+						
+						<span>Research Professor of Eminence</span>
+						
+						
+						<div class="accordion">
+							<dl>
+								<dt>
+									<a href="#" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger" style="padding: 2px 12px;"> Research Interests</a>
+								</dt>
+								<dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+									<ul>
+	<li>Mathematical Computer Science</li>
+	<li>Pedagogical issues</li>
+	</ul>
+								</dd>
+							</dl>
+						</div>
+						
+					</div>
+					
+				</div>
+				<hr class="compact-hr">
+			</div>	
+			<li><a onclick="show_student()">Students</a></li>
+			<div id="Student">
+				<hr class="compact-hr">
+					<div class="row">
+						<div class="col-xs-3">
+							<img src="https://serc.iiit.ac.in/static/images/people/Soumya.JPG" height=162px; width=180px; alt="">
+							<h4>M. Saraswati Soumya</h4>
+						</div>
+						
+						<div class="col-xs-3">
+							<img src="https://serc.iiit.ac.in/static/images/people/shiv.jpg" height=162px; width=180px; alt="">
+							<h4>Shivang Shekhar</h4>
+						</div>
+							
+						<div class="col-xs-3">
+							<img src="https://serc.iiit.ac.in/static/images/people/Raghav.jpg" height=162px; width=180px; alt="">
+							<h4>Raghav Mittal</h4>
+						</div>
+							
+						<div class="col-xs-3">
+							<img src="https://serc.iiit.ac.in/static/images/people/picture.jpg" height=162px; width=180px; alt="">
+							<h4>Anukul Sangwan</h4>
+						</div>	
+					</div>
+
+					<div class="row">
+						<div class="col-xs-3">
+							<img src="https://serc.iiit.ac.in/static/images/people/28460437_1988389268094763_900314689_o.jpg" height=162px; width=180px; alt="">
+							<h4>Vivek Iyer</h4>
+						</div>
+							
+						<div class="col-xs-3">
+							<img src="https://serc.iiit.ac.in/static/images/people/22467381_349747118786733_934236823640432709_o.jpg" height=162px; width=180px; alt="">
+							<h4>Mohit Kuri</h4>
+						</div>
+					</div>
+			</div>
+			<li><a onclick="show_alumni()">Alumni</a></li>
+			<div id="Alumni">
+				<hr class="compact-hr">
+				<div class="row">			
+					<div class="col-xs-3">
+						<img src="https://serc.iiit.ac.in/static/images/people/15151339_1433798099982341_1388853084_n.jpg" height=162px; width=180px; alt=""></a>
+						<h4>Akash Agrawall</a></h4>
+					</div>
+							
+					<div class="col-xs-3">
+						<img src="https://serc.iiit.ac.in/static/images/people/pic129b75022f0d1d46263ffa69335b80d2.jpg" height=162px; width=180px; alt=""></a>
+						<h4>Shivam Khandelwal</a></h4>
+					</div>
+					
+					<div class="col-xs-3">
+						<img src="https://serc.iiit.ac.in/static/images/people/download.png" height=162px; width=180px; alt=""></a>
+						<h4>Siddharth Bhatore</a></h4>
+					</div>
+					
+					<div class="col-xs-3">
+						<img src="https://serc.iiit.ac.in/static/images/people/12439484_10209386089515160_5072700934213511288_n.jpg" height=162px; width=180px; alt="">
+						<h4>Sai Krishna</h4>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-3">
+						<img src="https://serc.iiit.ac.in/static/images/people/SERC_NEERAJ_PIC.jpg" height=162px; width=180px; alt=""></a>
+						<h4>Neeraj Mathur</h4>
+					</div>
+					
+					<div class="col-xs-3">
+						<img src="https://serc.iiit.ac.in/static/images/people/sa.jpeg" height=162px; width=180px; alt=""></a>
+						<h4>Shriyansh Agrawal</h4>
+					</div>
+
+					<div class="col-xs-3">
+                    	<img src="https://serc.iiit.ac.in/static/images/people/60393158_1048126982042088_2895764356526505984_n.jpg" height=162px; width=180px; alt="">
+                    	<h4>Palash Agarwal</h4>
+                    </div>
+				</div>
+			</div>
+		</ul>
+	</div>
+</div>
+<div class="features-div">
+	<div id="hide_people">
+		<center>
+			<p>This page cannot be displayed</p>
+		</center>
+	</div>
+</div>
+
+<div class="container" id="Resources">
+	<div class="row">
+		<div class="main_heading">
+			<h1>Resources</h1>
+		<div  class="text-center"><span class="underline"></span></div>
+		<button id="hide4" onclick="hide_page4()">Hide Page</button>
+		<button id="show4" onclick="show_page4()">Show Page</button>
+	</div>
+	<div id="show_resources" class="features-div">
+		<div class="sub_heading">
+			<h3>Projects</h3>
+		</div>
+		<ul>
+		<li>
+		<a onclick="proj1()">Design Innovation Centre</a>
+		<div id="proj1">
+		<h4>Project title: Design Innovation Centre</h4>
+		<p>Funding Agency: Ministry of Human Resource Development (MHRD)</p>
+		<p>Design-Centered innovation is a force multiplier that can help in the country move up the value chain, making Indian industry globally competitive. In this context, Ministry of Human Resource Development proposes to launch a National Initiative for Design Innovation in the Twelfth Plan. Under this initiative, 20 new design Innovation Centers (DIC), one Open Design school (ODS) and a National Design Innovation Network  (NDIN), linking together all theses schools and other allied bodies such as leading institutions of Industry and academics, NGOs and government would be set up. To be part of this noble venture, The Department of Design at IIIT Hyderabad is setting itself up as one of the Design Innovation Centers. Since a ‘HUB &amp; Spoke’ model is to be adopted, The Department of Design, IIIT Hyderabad  would be a Hub and it plans to partner with the following institutes of national repute which would function as its spokes.</p>
+		<ul>
+			<li>
+				<p>"A Service-based approach to design and Build serious games for creating community Knowledge”</p>
+			</li>
+			<li>
+				<p>Framework and tool for Accessibility and Usability testing and other NFR testing for Government Application using Crowdsourcing models.</p>
+			</li>
+		</ul>
+		</div>
+	</li>
+	<br>
+	<li>
+		<a onclick="proj2()">Development of Security Search Engine</a>
+		<div id="proj2">
+			<h4>Project title: Development of Security Search Engine </h4>
+			<p>Funding Agency: Interdisciplinary Cyber Physical System (ICPS) –DST, GOI.</p>
+			<p>Following are some of the objectives of this project proposal:</p>
+			<ul>
+				<li> 
+					<p>Provide relevant and current information on various topics in security based on search criteria. Rank the results in the order of relevance and based on the credibility of website containing theinformation. As an example, if search results meet query criteria – security content available in Government websites like CERT-In could be shown with higher ranking.</p>
+				</li>
+				<li>
+					<p> Build Security Search Engine using scalable and extensible Open source software.</p>
+				</li>
+				<li> 
+					<p>Provide Top Vulnerabilities, Threats and Advisories based on the retrieved information. The would contain actionable information for mitigating against security related risks. BFSI sector, Government entities, Healthcare industry and all others that contain sensitive information and have a need to protect their IT infrastructure will benefit with these top trends. There may be multiple vulnerabilities across different software platforms, showing with actionable information of highly used OS would be more relevant. This relevance should also be based on the impact that the vulnerability could create such as remote  vis-à-vis an unnecessary process that is consuming memory.</p>
+				</li>
+				<li> 
+					<p>Provide relevant Security specific visualization based on search criteria. An example of thiswould be for a search on ‘Phishing’ - provide visualization on the “Lures – Amount” or 'Phishing –Country wise Incidents’ and others.</p>
+				</li>
+				<li>
+					<p> Contain feature for RSS Feed and Alerts based on user criteria (keyword, frequency, etc). This would help MSME and other small scale users of IT for better preparedness from security vulnerabilities.</p>
+				</li>
+			</ul>
+		</div>
+	</li>
+	<br>
+	<li>
+		<a onclick="proj3()">Living Labs in India with Smart Cities Project </a>
+		<div id="proj3">
+			<h4>Project title: Living Labs in India with Smart Cities Project  </h4>
+			<p>  Funding Agency: Ministry of Electronics and Information Technology</p>
+			<p>Taking on a key position in the ecosystem and enhancing the effective linkage of real time urban challenges as well as government initiatives and establishing a circular economy model by </p>
+			<ul>
+				<li>
+					<p>Bringing together relevant stakeholders across sectors and disciplines from both India and Europe </p>
+				</li>
+				<li>
+					<p>Identifying the demand of the lab environment as well as the urban local bodies with the local/international industries as the driving force for the Living Lab. </p>
+				</li>
+				<li>
+					<p>Establishing a well managed and transparent governance system</p>
+				</li>
+			</ul>
+		</div>
+	</li>
+	<br>
+	<li>
+		<a onclick="proj4()">Smart Contracts for Opensource Software License Management </a>
+		<div id="proj4">
+			<h4>Project title: Smart Contracts for Opensource Software License Management  </h4>
+			<p>Funding Agency: RIPPLE</p>
+			<p>a)  Study smart contract development environment and work on digital asset management.</p>
+			<p>b)  List the contract terms of open source software.</p>
+			<p>c)     Prototype smart contract development for open source software licenses.</p>
+		</div>
+	</li>
+	<br>
+	<li>
+		<a onclick="proj5()">Compiling Polymage Domain Specific Language for Emerging Parallel Architecture </a>
+		<div id="proj5">
+			<h4>Project title: Compiling Polymage Domain Specific Language for Emerging Parallel Architecture  </h4>
+			<p>Funding Agency: Science and Engineering Research Board (SERB)</p>
+			<ul>
+			<li>
+			<p>Targeting Reconffigurable Architecture (FPGAs)</p>
+			</li>
+			<li>
+			<p>Motivation and plan with Preliminary Work and Investigation</p>
+			</li>
+			<li>
+			<p>Concrete Aspects and Tasks</p>
+			</li>
+			<li>
+			<p>Exploiting Customized Precision and Approximation</p>
+			</li>
+			<li>
+			<p>More Complex Benchmarks</p>
+			</li>
+			<li>
+			<p>Heterogeneous CPU-FPGA Architectures</p>
+			</li>
+			<li>
+			<p>Performance Comparisation with Multi-core CPU and GPUs </p>
+			</li>
+			<li>
+			<p>New Application Domains</p>
+			</li>
+			</ul>
+		</div>
+	</li>
+	</ul>
+		<div class="sub_heading">
+			<h3>Courses offered by IIIT Hyderabad</h3>
+		</div>
+		<table>
+			<thead>
+			<tr>
+			<th>Course</th>
+			<th>Brief Description</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+			<td>Software Engineering</td>
+			<td>To develop in-depth understanding of software engineering principles, practices and ability to apply them in developing large scale software systems.</td>
+			</tr>
+			<tr>
+			<td>Software Systems Analsis and Design</td>
+			<td>Provides an introduction to software engineering concepts and techniques to undergraduate students. Enables the students to work in smaller teams and deliver software systems.</td>
+			</tr>
+			<tr>
+			<td>Software Foundations</td>
+			<td>Provides mathematical foundations of programs and software systems so as to be able to prove properties about their behaviour.</td>
+			</tr>
+			<tr>
+			<td>Software Quality Engineering</td>
+			<td>Imparts quality analyses of software systems. Topics include verification, software quality assurance, standards, etc. Concepts and skills necessary to design and and validation, metrics and measurements are also part of the curriculum.</td>
+			</tr>
+			<tr>
+			<td>Internals of Application Servers</td>
+			<td>Understand essence of middleware and distributed object technology. J2EE Technology and Architecture overview. J2EE App Server architecture. Life cycle of a J2EE application-deployment through running and deployment.</td>
+			</tr>
+			<tr>
+			<td>Principles of Programming Languages</td>
+			<td>This course is an introduction to the principles behind the design of programming languages, including object-oriented programming, and the use of formal methods in reasoning with programs. During the course, students build a series of interpreters, each a mini abstract or virtual machine for a specific language.</td>
+			</tr>
+			</tbody>
+			</table>
+	</div>
+</div>
+<div class="features-div">
+	<div id="hide_resources">
+		<center>
+			<p>This page cannot be displayed</p>
+		</center>
+	</div>
+</div>
+</div>
+
+<div class="container" id="Contact">
+	<div class="row">
+		<div class="main_heading">
+			<h1>Contact Us</h1>
+		<div  class="text-center"><span class="underline"></span></div>
+			<button id="hide5" onclick="hide_page5()">Hide Page</button>
+			<button id="show5" onclick="show_page5()">Show Page</button>
+		</div>
+	<div id="show_contact" class="features-div">
+		<div class="sub_heading">
+			<h3>Postal Address</h3>
+		</div>
+		<p>International Institute of Information Technology<br /> Prof. C R Rao Road<br />Gachibowli, Hyderabad 500 032<br />Telangana, INDIA<br />Phone : +91-40-6653 1000<br />Fax :&nbsp;&nbsp;&nbsp;&nbsp; +91-40-6653 1413</p>
+		<div class="sub_heading">
+			<h3>Feedback</h3>
+		</div>
+		<form>
+			<input type="text" placeholder="Your Name:" id="feedback" name="name">&emsp;&emsp;&emsp;&emsp;
+			<input type="number" placeholder="Telephone:" id="feedback" name="telephone">&emsp;&emsp;&emsp;&emsp;
+			<input type="email" placeholder="Email:" id="feedback" name="email"><br><br>
+			<textarea placeholder="Message:" id="message" name="message"></textarea><br><br>
+			<center>
+				<button type="submit" id="submit-btn">SUBMIT</button>
+			</center>			
+		</form>
+	</div>
+	</div>
+<div class="features-div">
+	<div id="hide_contact">
+		<center>
+			<p>This page cannot be displayed</p>
+		</center>
+	</div>
+</div>
+
+<div class="container" id="Publications">
+	<div class="row">
+		<div class="main_heading">
+			<h1>Publications</h1>
+		<div  class="text-center"><span class="underline"></span></div>
+		<button id="hide6" onclick="hide_page6()">Hide Page</button>
+		<button id="show6" onclick="show_page6()">Show Page</button>
+	</div>
+	<div id="show_publications" class="features-div">
+		<ul id="ProfileList">
+			<li>
+				<a onclick="extract1()">Sai Anirudh Karre</a>	
+				<ul id="p1"></ul>	
+			</li>
+			<br>
+			<li>
+				<a onclick="extract2()">Neeraj Mathur</a>	
+				<ul id="p2"></ul>
+			</li>
+			<br>
+			<li>
+				<a onclick="extract3()">Lalit Mohan Sanagavarapu</a>	
+				<ul id="p3"></ul>
+			</li>
+			<br>
+			<li>
+				<a onclick="extract4()">Gollapudi V. R. J. Sai Prasad</a>	
+				<ul id="p4"></ul>
+			</li>
+			<br>
+			<li>
+				<a onclick="extract5()">Kesav V. Nori</a>	
+				<ul id="p5"></ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="features-div">
+	<div id="hide_publications">
+		<center>
+			<p>This page cannot be displayed</p>
+		</center>
+	</div>
+</div>
+
+<div class="container" id="News/Updates">
+	<div class="row">
+		<div class="main_heading">
+			<h1>News/Updates</h1>
+		<div  class="text-center"><span class="underline"></span></div>
+		<button id="hide7" onclick="hide_page7()">Hide Page</button>
+		<button id="show7" onclick="show_page7()">Show Page</button>
+	</div>
+	<div id="show_news" class="features-div">
+		<article>
+			<ul>
+			<li>
+				<a href="https://www.apnnews.com/iiith-conducts-design-thinking-workshop/">IIITH conducts Design Thinking workshop</a>
+			</li>
+			<li>
+				<a href="https://telanganatoday.com/living-lab-at-iiit-h-deploying-new-tech-to-improve-quality-of-urban-life">Smart City Living Lab to improve quality of urban life</a>
+			</li>
+			<li>
+				<a href="https://contentmediasolution.com/business/roundtable-on-technologies-to-address-the-last-mile-in-healthcare-held/">RCTS organises Roundtable on  Healthcare Technologies</a>
+			</li>
+			<li>
+				<a href="http://businessnewsthisweek.com/prnews/?rkey=20211004EN27588&filter=601">Skill Development Course on Foundations of Modern ML launched at IHub-Data-IIITH</a>
+			</li>
+			<li>
+				<a href="https://newsdeal.in/iiit-h-inks-mou-with-nims-to-digitise-data-on-indian-cancer-malignancies/">IIITH and NIMS join hands to digitize pathological slides</a>
+			</li>
+			<li>
+				<a href="http://businessnewsthisweek.com/technology/ai-powered-project-iraste-for-road-safety-launched-by-consortium-comprising-intel-india-inai-iiit-hyderabad-csir-crri-mahindra-mahindra-and-nmc/">Collaborative AI project iRASTE launched</a>
+			</li>
+			<li>
+				<a href="https://epaper.thehindu.com/Home/ShareArticle?OrgId=GMQ8ULQVT.1">IIITH researchers propose a novel cryptographic polling method</a>
+			</li>
+			<li>
+				<a href="https://timesofindia.indiatimes.com/city/hyderabad/iit-hyd-devises-new-low-cost-location-tool-without-gps/articleshow/85500455.cms">IIITH devises new low-cost location tool to track assets</a>
+			</li>
+			</ul>
+		</article>
+	</div>
+<div class="features-div">
+	<div id="hide_news">
+		<center>
+			<p>This page cannot be displayed</p>
+		</center>
+	</div>
+</div>
+
+<footer>
+    <div class="container">
+    	<div class="row">
+            <div class="col-sm-12 footer-social">
+            	<a href="https://twitter.com/SERC_IIITH"><i class="fa fa-twitter"></i></a>            	
+            	<a href="https://www.linkedin.com/company/serciiith/?originalSubdomain=in"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 footer-copyright">
+            	© 2021 Software Engineering Research Center (SERC), IIIT-Hyderabad.
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+
+<script type="text/javascript" src="scripts/jquery-main.js"></script>
+<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+<script src="scripts/wow.min.js"></script>
+
+<script>
+	new WOW().init();
+</script>
+
+</body>
+</html>
