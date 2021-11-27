@@ -72,6 +72,19 @@ router.post('/mouse_coords/:task_id', verify_token, async (req, res) => {
     }
 });
 
+router.get('/mouse_coords/:task_id', verify_token, async (req, res) => {
+    try {
+        const task = await Task.findOne({
+            _id: req.params.task_id
+        });
+        console.log(task);
+
+        res.status(200).json(task[mouse_coords]);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 
 
 module.exports = router
