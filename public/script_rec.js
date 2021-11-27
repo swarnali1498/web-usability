@@ -3,6 +3,7 @@ const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const video = document.querySelector("video");
 var start_time = new Date();
+var mouse_coorinates = [];
 let recorder, stream;
 
 let count = 0
@@ -63,6 +64,17 @@ start.addEventListener("click", () => {
   show.setAttribute("disabled", true);
   start_time = new Date();
   startRecording();
+ 
+  document.querySelector('body').onclick = function(ev) {
+      let x = ev.layerX
+      let y = ev.layerY
+
+      cord.push(x,y)
+
+      console.log(x,y);
+      console.log(cord)
+      console.log(window.location.href)
+  }
 });
 
 stop.addEventListener("click", () => {
