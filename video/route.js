@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const verify_token = require('../middleware/verify_token');
-
+const fileUpload = require('express-fileupload');
 const JWT = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
