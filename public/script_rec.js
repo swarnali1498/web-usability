@@ -2,6 +2,7 @@
 const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const video = document.querySelector("video");
+var start_time = new Date();
 let recorder, stream;
 
 let count = 0
@@ -60,7 +61,7 @@ start.addEventListener("click", () => {
   start.setAttribute("disabled", true);
   stop.removeAttribute("disabled");
   show.setAttribute("disabled", true);
-  // let start_time = new Date();
+  start_time = new Date();
   startRecording();
 });
 
@@ -68,7 +69,44 @@ stop.addEventListener("click", () => {
   stop.setAttribute("disabled", true);
   start.removeAttribute("disabled");
   show.removeAttribute("disabled");
-
   recorder.stop();
   stream.getVideoTracks()[0].stop();
+  var end_time = new Date();
+  try {
+    const formData = new FormData();
+    let mouse_obj = {};
+    mouse_obj["URL"]= task_url;
+    mouse_obj["mouse_coords"] = mouse_coorinates;
+    form.append("start_time",start_time);
+    form.append("end_time",end_time);
+    form.append("mouse_coords",mouse_obj);
+    const responseObj = await postFormDataAsJson(url_post, formData);
+  } catch (error) {
+    console.error(error);
+  }
+  
 });
+async function postFormDataAsJson(url, formData) {
+      const plainFormData = Object.fromEntries(formData.entries());
+      const formDataJsonString = JSON.stringify(plainFormData);
+      console.log(formDataJsonString);
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "token " + token
+        },
+        body: formDataJsonString,
+      };
+      const response = await fetch(url, fetchOptions);
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      } else{
+        window.location.href = "projectdashboard.html";
+        //reload
+      }
+      return response.json();
+    }
+    
