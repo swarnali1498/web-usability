@@ -65,16 +65,16 @@ start.addEventListener("click", () => {
   show.setAttribute("disabled", true);
   start_time = new Date();
   startRecording();
- 
-  document.querySelector('body').onclick = function(ev) {
-      let x = ev.layerX
-      let y = ev.layerY
 
-      mouse_coorinates.push(x,y)
+  document.querySelector('body').onclick = function (ev) {
+    let x = ev.layerX
+    let y = ev.layerY
 
-      console.log(x,y);
-      console.log(mouse_coorinates)
-      console.log(window.location.href)
+    mouse_coorinates.push(x, y)
+
+    console.log(x, y);
+    console.log(mouse_coorinates)
+    console.log(window.location.href)
   }
 });
 
@@ -88,38 +88,38 @@ stop.addEventListener("click", async () => {
   try {
     const formData = new FormData();
     let mouse_obj = {};
-    mouse_obj["URL"]= task_url;
+    mouse_obj["URL"] = task_url;
     mouse_obj["mouse_coords"] = mouse_coorinates;
-    form.append("start_time",start_time);
-    form.append("end_time",end_time);
-    form.append("mouse_coords",mouse_obj);
+    form.append("start_time", start_time);
+    form.append("end_time", end_time);
+    form.append("mouse_coords", mouse_obj);
     const responseObj = await postFormDataAsJson(url_post, formData);
   } catch (error) {
     console.error(error);
   }
-  
+
 });
 async function postFormDataAsJson(url, formData) {
-      const plainFormData = Object.fromEntries(formData.entries());
-      const formDataJsonString = JSON.stringify(plainFormData);
-      console.log(formDataJsonString);
-      const fetchOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": "token " + token
-        },
-        body: formDataJsonString,
-      };
-      const response = await fetch(url, fetchOptions);
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        throw new Error(errorMessage);
-      } else{
-        window.location.href = "projectdashboard.html";
-        //reload
-      }
-      return response.json();
-    }
-    
+  const plainFormData = Object.fromEntries(formData.entries());
+  const formDataJsonString = JSON.stringify(plainFormData);
+  console.log(formDataJsonString);
+  const fetchOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "token " + token
+    },
+    body: formDataJsonString,
+  };
+  const response = await fetch(url, fetchOptions);
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
+  } else {
+    window.location.href = "projectdashboard.html";
+    //reload
+  }
+  return response.json();
+}
+

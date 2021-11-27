@@ -166,7 +166,7 @@
       }
     }
     async function showTestStats(id) {
-     
+
       new bootstrap.Modal(modal);
       console.log(task_list_object[0]);
       test_id = task_list_object[0]["_id"];
@@ -253,7 +253,7 @@
       if (!response.ok) {
         const errorMessage = await response.text();
         throw new Error(errorMessage);
-      }else{
+      } else {
         if (confirm("Participant Added!")) {
           window.location.reload();
         } else {
