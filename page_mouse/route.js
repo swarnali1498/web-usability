@@ -12,7 +12,7 @@ const {
 } = process.env;
 
 
-router.get('/', verify_token, async (req, res) => {
+router.post('/get', verify_token, async (req, res) => {
     try {
         const page = await Page.findOne({
             URL: req.body.URL

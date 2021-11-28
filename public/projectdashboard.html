@@ -17,15 +17,17 @@
   <nav class="navbar navbar-light bg-light ">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-                <img src="https://images.shiksha.com/mediadata/images/1571920801phpDEQFI7.jpeg" alt="" width="60" height="40" style = "padding-right: 20px">
-                International Institute of Information And Technology, Hyderabad
-            </a>
-            <div>
-                <a href="https://www.linkedin.com/company/serciiith/?originalSubdomain=in"><i class="fa fa-linkedin fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://www.facebook.com/SERC.IIITH/"><i class="fa fa-facebook fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://twitter.com/SERC_IIITH"><i class="fa fa-twitter fa-2x"></i></a>
-                <button class="btn btn-outline-success" type="submit">Logout</button>&nbsp;&nbsp;
-            </div>
+        <img src="https://images.shiksha.com/mediadata/images/1571920801phpDEQFI7.jpeg" alt="" width="60" height="40"
+          style="padding-right: 20px">
+        International Institute of Information And Technology, Hyderabad
+      </a>
+      <div>
+        <a href="https://www.linkedin.com/company/serciiith/?originalSubdomain=in"><i
+            class="fa fa-linkedin fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.facebook.com/SERC.IIITH/"><i class="fa fa-facebook fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://twitter.com/SERC_IIITH"><i class="fa fa-twitter fa-2x"></i></a>
+        <button class="btn btn-outline-success" type="submit">Logout</button>&nbsp;&nbsp;
+      </div>
     </div>
   </nav>
 
@@ -82,12 +84,11 @@
           <div class="col-3 ">
             <h4>Tasks:</h4>
           </div>
-          
+
           <div id="adminMode" class="col-6">
-            <button id="addProject"
-              class="projectItem btn me-5 btn-success align-self-end" type="submit" data-bs-toggle="modal"
-              data-bs-target=".project-register-form">+ Tasks</button>
-            </div>
+            <button id="addProject" class="projectItem btn me-5 btn-success align-self-end" type="submit"
+              data-bs-toggle="modal" data-bs-target=".project-register-form">+ Tasks</button>
+          </div>
 
 
         </div>
@@ -122,14 +123,13 @@
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
-  
     integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
   <!-- CSS only -->
   <!-- JavaScript Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-    
+
   <script> //$('.carousel').carousel(); 
 
     var user_email = sessionStorage.getItem('user_email')
@@ -140,15 +140,15 @@
     var project_name = sessionStorage.getItem('project_name')
     var url_post = "";
     var url_get = "";
-    var heat_map_width="";
-    var screen = "";
+    var heat_map_width = "";
+    // var screen = "";
     var project_url = "";
     /* 
       observer: fetch tasks of the project_id
   
       GET project/tasks/{project_id}
     */
-   
+
 
     if (user_type == "participant/") {
       url_get = server_address + user_type + "project/" + project_id + "/tasks";
@@ -190,6 +190,7 @@
       console.log(projectInfo);
 
       var project_info_object = projectInfo;
+      console.log(project_info_object);
       var tmp = '';
       var i = 0;
       $.each(taskList["data"], function (key, value) {
@@ -203,26 +204,27 @@
       $('#projectName').prepend(project_name);
       $('#projectOrganization').prepend(project_info_object["organization"]);
       $('#projectURL').prepend(project_info_object["URL"]);
+      project_url = project_info_object["URL"];
       $('#projectDescription').prepend(project_info_object["description"]);
       generateHeatMap();
     }
-       wraper();
+    wraper();
 
 
-     if (user_type != "observer/") {
-       console.log("sda");
-       $("#adminMode").hide();
-     }
-//     var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
-//     var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
+    if (user_type != "observer/") {
+      console.log("sda");
+      $("#adminMode").hide();
+    }
+    //     var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
+    //     var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
 
-//     var taskList = JSON.parse( responseList );
-//     $('#projectName').prepend(project_name);
-//     $('#projectOrganization').prepend(projectInfo["organization"]);
-//     $('#projectURL').prepend(projectInfo["URL"]);
-//     project_url = projectInfo["URL"];
-//     $('#projectDescription').prepend(projectInfo["description"]);
-    
+    //     var taskList = JSON.parse( responseList );
+    //     $('#projectName').prepend(project_name);
+    //     $('#projectOrganization').prepend(projectInfo["organization"]);
+    //     $('#projectURL').prepend(projectInfo["URL"]);
+    //     project_url = projectInfo["URL"];
+    //     $('#projectDescription').prepend(projectInfo["description"]);
+
     function handleTaskSelect(id) {
 
       sessionStorage.setItem('task_id', taskList["data"][id].id);
@@ -293,19 +295,20 @@
     var heatmapInstance = h337.create({
       container: document.querySelector('.heatmap'),
       radius: 25,
-      maxOpacity: .7,backgroundColor: 'rgba(0,0,0,.09)',
-    //   minOpacity: .4,
-    
+      maxOpacity: .7, backgroundColor: 'rgba(0,0,0,.09)',
+      //   minOpacity: .4,
+
     });
-    async function getCoordinate(url,data) {
+    async function getCoordinate(url, data) {
+      const formDataJsonString = JSON.stringify(data);
       const fetchOptions = {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
           "Authorization": "token " + token,
         },
-        body: data
+        body: formDataJsonString
       };
       try {
         let response = await fetch(url, fetchOptions);
@@ -318,20 +321,39 @@
     }
     async function generateHeatMap() {
       heat_map_width = document.getElementById('heat-map').offsetWidth;
-      screen = window.screen.width;
+      // screen = window.screen.width;
 
-      console.log("ASh");
+      console.log("ASh", heat_map_width);
       //console.log(ev.layerX,ev.layerY);
       data = {}
       data["URL"] = project_url;
-      var res = await getCoordinate(server_address + "page", data);
+      var res = await getCoordinate(server_address + "page/get", data);
       var coordinates = res["mouse_coords"];
-      for(let i = 0; i<coordinates.length; i+=2){
+      console.log("Adding Coords");
+      console.log(coordinates);
+
+      /* 
+      height = 5145
+      width = 1920
+
+      clientHeight: 4382
+      clientWidth: 1247
+      */
+
+      for (let i = 0; i < coordinates.length; i += 2) {
+        console.log(i);
+        let x = (coordinates[i] * 4382) / 1920;
+        let y = (coordinates[i + 1] * 1247) / 5145;
         heatmapInstance.addData({
-          x: (coordinates[i] * heat_map_width)/screen,
-          y: (coordinates[i+1] * heat_map_width)/screen,
+          x: parseInt(x),
+          y: parseInt(y),
           value: 100,
         });
+        // heatmapInstance.addData({
+        //   x: coordinates[i],
+        //   y: coordinates[i + 1],
+        //   value: 100,
+        // });
       }
     };
   </script>
