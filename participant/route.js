@@ -46,8 +46,8 @@ router.get('/project/:project_id/tasks', verify_token, async (req, res) => {
         const participants = await Participant.find({
             _id: id
         });
-
-        console.log(participants);
+        console.log("sending tasks");
+        console.log(participants[0]["tasks"]);
         res.status(200).json({ data: participants[0]["tasks"] });
 
     } catch (err) {

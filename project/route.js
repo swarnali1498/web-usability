@@ -25,11 +25,13 @@ router.get('/', verify_token, async (req, res) => {
 router.get('/:project_id/info', verify_token, async (req, res) => {
     try {
         const project_id = req.params.project_id;
-        const project = await Project.find({
+        console.log(project_id);
+        const project = await Project.findOne({
             _id: project_id
         });
+        console.log("sending project info");
         console.log(project);
-        res.json(project[0]);
+        res.json(project);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

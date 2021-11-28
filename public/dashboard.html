@@ -302,7 +302,7 @@
             // var responseData = '[{"id":"1","name":"Project 1"}, {"id":"2", "name":"Project 2"}, {"id":"3", "name":"Project 3"}, {"id":"4", "name":"Project 4"}]';
             obj = responseData[0];//= JSON.parse(responseData);
             // console.log(responseData);
-            // console.log(obj);
+            console.log(obj);
 
 
             var tmp = '';
@@ -319,8 +319,13 @@
         wraper();
 
         function handleProjectSelect(id) {
-            // console.log(id, obj[id]);
-            sessionStorage.setItem('project_id', obj[id]._id);
+            console.log(id, obj[id]);
+            if (user_type == "participant/") {
+                sessionStorage.setItem('project_id', obj[id].id);
+            } else {
+                sessionStorage.setItem('project_id', obj[id]._id);
+            }
+
             sessionStorage.setItem('project_name', obj[id].name);
             window.location.href = "projectdashboard.html";
         };
