@@ -27,7 +27,7 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYW
     "mouse_coords": [1, 2, 3, 4 ,5 ,6]
 }
 ###
-GET http://localhost:3000/page
+POST http://localhost:3000/page/get
 Content-Type: application/json
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYWsucmF3YXRAc3R1ZGVudHMuaWlpdC5hYy5pbiIsIm5hbWUiOiJzYXJ0aGFrIHJhd2F0IiwiaWF0IjoxNjM2ODE2ODU4fQ.mD42iTOqnSQ4FeavikkQeCraxP24o5Wt5RU3t3JWv3A
 

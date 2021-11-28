@@ -13,7 +13,7 @@
 
 </head>
 
-<body class="min-vw-100 ">
+<body class="min-vw-100 body1">
   <nav class="navbar navbar-light bg-light ">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
@@ -340,8 +340,10 @@
       clientWidth: 1247
       */
 
+
       for (let i = 0; i < coordinates.length; i += 2) {
         console.log(i);
+
         let x = (coordinates[i] * 4382) / 1920;
         let y = (coordinates[i + 1] * 1247) / 5145;
         heatmapInstance.addData({
@@ -355,6 +357,13 @@
         //   value: 100,
         // });
       }
+    };
+
+    document.querySelector('.body1').onclick = function (ev) {
+      let x = ev.layerX;
+      let y = ev.layerY;
+
+      console.log(x, y);
     };
   </script>
 </body>

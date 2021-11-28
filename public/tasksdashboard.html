@@ -21,8 +21,9 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div id="videoPlayer" class="box col-8" style="height:70vh;">
-
+            <div id="video_div" class="box col-8" style="height:70vh;">
+              <video id="video_player" height="80" width="60" type="video/webm">
+              </video>
             </div>
             <div class="box col-4" style="height:70vh;">
               <div id="add_remark" class="box" style="height:100%;">
@@ -33,6 +34,8 @@
                   </div>
                   <button type="submit" class="btn btn-primary me-2 py-2">Add</button>
                 </form>
+
+                <button id="video_button" class="btn btn-primary me-2 py-2">Play Video</button>
               </div>
             </div>
           </div>
@@ -43,15 +46,17 @@
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-                <img src="https://images.shiksha.com/mediadata/images/1571920801phpDEQFI7.jpeg" alt="" width="60" height="40" style = "padding-right: 20px">
-                International Institute of Information And Technology, Hyderabad
-            </a>
-            <div>
-                <a href="https://www.linkedin.com/company/serciiith/?originalSubdomain=in"><i class="fa fa-linkedin fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://www.facebook.com/SERC.IIITH/"><i class="fa fa-facebook fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://twitter.com/SERC_IIITH"><i class="fa fa-twitter fa-2x"></i></a>
-                <button class="btn btn-outline-success" type="submit">Logout</button>&nbsp;&nbsp;
-            </div>
+        <img src="https://images.shiksha.com/mediadata/images/1571920801phpDEQFI7.jpeg" alt="" width="60" height="40"
+          style="padding-right: 20px">
+        International Institute of Information And Technology, Hyderabad
+      </a>
+      <div>
+        <a href="https://www.linkedin.com/company/serciiith/?originalSubdomain=in"><i
+            class="fa fa-linkedin fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.facebook.com/SERC.IIITH/"><i class="fa fa-facebook fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://twitter.com/SERC_IIITH"><i class="fa fa-twitter fa-2x"></i></a>
+        <button class="btn btn-outline-success" type="submit">Logout</button>&nbsp;&nbsp;
+      </div>
     </div>
   </nav>
   <div class="modal fade project-register-form" role="dialog" style="height:80vh;top:80px">
@@ -90,7 +95,8 @@
         <p id="projectURL" class="col"></p>
         <p id="projectDescription" class="col"></p>
       </div>
-      <div id="projectStats" class="box col">
+      <div id="projectStats">
+
       </div>
     </div>
     <div class="col-8 ">
@@ -265,6 +271,14 @@
       return response;
     }
 
+    document.getElementById("video_button").addEventListener("click", function () {
+      let url = "http://localhost:3001/" + test_id + ".webm";
+      let video = document.getElementById("video_player");
+      video.src = url;
+      console.log(video);
+      // video.play();
+      window.open(url, '_blank');
+    });
 
 
     // var responseTestsList ='[{"participant_name":"Spider Man","start_time":"12/11/21, Monday"},{"participant_name":"Bat Man","start_time":"12/11/21, Monday"},{"participant_name":"Super Man","start_time":"12/11/21, Monday"}]'
