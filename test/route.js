@@ -181,6 +181,7 @@ router.post('/end/:id', verify_token, async (req, res) => {
 
         test.start_time = new Date(req.body.start_time);
         test.end_time = new Date(req.body.end_time);
+        test.video_url = req.body.video_url;
 
         // const task = await Task({
         //     _id: req.body.task_id

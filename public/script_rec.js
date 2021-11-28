@@ -37,7 +37,7 @@ async function startRecording() {
     const link = document.createElement('a');
     link.href = video.src;
     count = count + 1;
-    link.download = count.toString() + ".webm";
+    link.download = test_id + ".webm";
     link.click();
     localStorage.setItem("url", link.href);
     localStorage.setItem("page_list", "");
@@ -103,6 +103,7 @@ stop.addEventListener("click", async () => {
     const form = new FormData();
     form.append("start_time", start_time);
     form.append("end_time", end_time);
+    form.append("video_url", test_id);
     const responseObj = await postFormDataAsJson(server_address + "test/end/" + test_id, form);
     console.log(responseObj);
   } catch (error) {
