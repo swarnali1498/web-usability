@@ -205,22 +205,22 @@
       $('#projectDescription').prepend(project_info_object["description"]);
       generateHeatMap();
     }
-        //wraper();
+       wraper();
 
 
-    // if (user_type != "observer/") {
-    //   console.log("sda");
-    //   $("#adminMode").hide();
-    // }
-    var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
-    var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
+     if (user_type != "observer/") {
+       console.log("sda");
+       $("#adminMode").hide();
+     }
+//     var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
+//     var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
 
-    var taskList = JSON.parse( responseList );
-    $('#projectName').prepend(project_name);
-    $('#projectOrganization').prepend(projectInfo["organization"]);
-    $('#projectURL').prepend(projectInfo["URL"]);
-    project_url = projectInfo["URL"];
-    $('#projectDescription').prepend(projectInfo["description"]);
+//     var taskList = JSON.parse( responseList );
+//     $('#projectName').prepend(project_name);
+//     $('#projectOrganization').prepend(projectInfo["organization"]);
+//     $('#projectURL').prepend(projectInfo["URL"]);
+//     project_url = projectInfo["URL"];
+//     $('#projectDescription').prepend(projectInfo["description"]);
     
     function handleTaskSelect(id) {
 
