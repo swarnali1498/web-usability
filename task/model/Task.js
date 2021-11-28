@@ -15,14 +15,13 @@ const task_schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    mouse_coords: [{
+    mouse_coords: {
         URL: {
-            type: String
-        },
-        mouse_coords: [{
-            type: Number
-        }]
-    }]
+            mouse_coords: [{
+                type: Number
+            }]
+        }
+    }
 });
 
 // [
@@ -34,6 +33,8 @@ const task_schema = new mongoose.Schema({
 /* 
 
     URL + task_id + clicks
+
+    test[mouse_coords][url] = array
 
 */
 

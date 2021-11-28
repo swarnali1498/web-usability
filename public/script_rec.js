@@ -40,6 +40,7 @@ async function startRecording() {
     link.download = count.toString() + ".webm";
     link.click();
     localStorage.setItem("url", link.href);
+    localStorage.setItem("page_list", "");
   };
   recorder.start();
 }
@@ -66,16 +67,7 @@ start.addEventListener("click", () => {
   start_time = new Date();
   startRecording();
 
-  document.querySelector('body').onclick = function (ev) {
-    let x = ev.layerX
-    let y = ev.layerY
 
-    mouse_coorinates.push(x, y)
-
-    console.log(x, y);
-    console.log(mouse_coorinates)
-    console.log(window.location.href)
-  }
 });
 
 stop.addEventListener("click", async () => {
@@ -85,16 +77,34 @@ stop.addEventListener("click", async () => {
   recorder.stop();
   stream.getVideoTracks()[0].stop();
   var end_time = new Date();
-  var url_post = server_address + "task/mouse_coords/" + task_id;
+  // var url_post = server_address + "task/mouse_coords/" + task_id;
   try {
+    page_list = JSON.parse(localStorage.getItem("page_list"));
+    console.log(page_list);
+    $.each(page_list, async function (key, value) {
+      /* 
+        POST page/
+        {
+          URL:
+          Mouse_coords:
+        }  
+
+      */
+      console.log(key);
+
+      console.log(value["mouse_coords"]);
+      let form = {};
+      form["mouse_coords"] = value["mouse_coords"];
+      form["URL"] = key;
+      console.log(form);
+      const responseObj = await postDataAsJson(server_address + "page", form);
+      console.log(responseObj);
+    });
     const form = new FormData();
-    let mouse_obj = {};
-    mouse_obj["URL"] = task_url;
-    mouse_obj["mouse_coords"] = mouse_coorinates;
     form.append("start_time", start_time);
     form.append("end_time", end_time);
-    form.append("mouse_coords", mouse_obj);
-    const responseObj = await postFormDataAsJson(url_post, form);
+    const responseObj = await postFormDataAsJson(server_address + "test/end/" + test_id, form);
+    console.log(responseObj);
   } catch (error) {
     console.error(error);
   }
@@ -103,7 +113,7 @@ stop.addEventListener("click", async () => {
 async function postFormDataAsJson(url, formData) {
   const plainFormData = Object.fromEntries(formData.entries());
   const formDataJsonString = JSON.stringify(plainFormData);
-  console.log(formDataJsonString);
+  console.log(plainFormData);
   const fetchOptions = {
     method: "POST",
     headers: {
@@ -118,9 +128,32 @@ async function postFormDataAsJson(url, formData) {
     const errorMessage = await response.text();
     throw new Error(errorMessage);
   } else {
-    window.location.href = "projectdashboard.html";
+    // window.location.href = "projectdashboard.html";
     //reload
   }
-  return response.json();
+  return await response.json();
+}
+
+
+async function postDataAsJson(url, formData) {
+  const formDataJsonString = JSON.stringify(formData);
+  const fetchOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "token " + token
+    },
+    body: formDataJsonString,
+  };
+  const response = await fetch(url, fetchOptions);
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
+  } else {
+    // window.location.href = "projectdashboard.html";
+    //reload
+  }
+  return await response.json();
 }
 

@@ -50,7 +50,7 @@ router.post('/', verify_token, async (req, res) => {
     }
 });
 
-router.post('/mouse_coords/:task_id', verify_token, async (req, res) => {
+router.post('/mouse_coords/:task_id', async (req, res) => {
     try {
         console.log(req.body.mouse_coords);
         const task = await Task.findOne({
@@ -72,7 +72,7 @@ router.post('/mouse_coords/:task_id', verify_token, async (req, res) => {
     }
 });
 
-router.get('/mouse_coords/:task_id', verify_token, async (req, res) => {
+router.get('/mouse_coords/:task_id', async (req, res) => {
     try {
         const task = await Task.findOne({
             _id: req.params.task_id

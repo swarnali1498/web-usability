@@ -27,6 +27,7 @@ const route_project = require('./project/route');
 const route_task = require('./task/route');
 const route_test = require('./test/route');
 const route_calendar = require('./calendar/route');
+const route_page = require('./page_mouse/route');
 // const route_video = require('./video/route');
 
 app.use('/participant', route_participant);
@@ -35,6 +36,7 @@ app.use('/project', route_project);
 app.use('/task', route_task);
 app.use('/test', route_test);
 app.use('/calendar', route_calendar);
+app.use('/page', route_page);
 // app.use('/video', route_video);
 app.use(express.static('public'));
 app.use(express.static('video'));

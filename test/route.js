@@ -150,13 +150,62 @@ router.post('/start/:id', verify_token, async (req, res) => {
     }
 });
 
+/* 
+POST test/end/{test_id}
+{
+    task_id:
+    start_time:
+    end_time:
+    mouse_coords:[
+        {
+            URl:"local",
+            mouse_coords: [1, 2, 3, 4]
+        },
+        {
+            URl:"local",
+            mouse_coords: [1, 2, 3, 4]
+        },
+        ...
+    ]
+}
+
+*/
+
+
 router.post('/end/:id', verify_token, async (req, res) => {
     try {
+        console.log(req.body);
         const test = await Test.findOne({
             _id: req.params.id
         });
-        test.end_time = new Date();
-        await test.save();
+
+        test.start_time = new Date(req.body.start_time);
+        test.end_time = new Date(req.body.end_time);
+
+        // const task = await Task({
+        //     _id: req.body.task_id
+        // });
+        // console.log(task);
+        // console.log(typeof (req.body.mouse_coords));
+
+
+        // req.body.mouse_coords.forEach(element => {
+        //     const obj = task["mouse_coords"].find({
+        //         URL: element["URL"]
+        //     });
+
+        //     console.log(obj);
+
+        //     // if (task["mouse_coords"]["URL"] == undefined) {
+        //     //     task["mouse_coords"][element["URL"]] = [];
+        //     // }
+        //     // task["mouse_coords"][element["URL"]] = (element["mouse_coords"]);
+        // });
+
+        const new_test = await test.save();
+        // const new_task = await task.save();
+        console.log(new_test);
+        // console.log(new_task);
         res.status(200).json({ message: "Ended the test" });
     } catch (err) {
         res.status(500).json({ error: err.message });

@@ -3,5 +3,36 @@ Content-Type: application/json
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYWsucmF3YXRAc3R1ZGVudHMuaWlpdC5hYy5pbiIsIm5hbWUiOiJzYXJ0aGFrIHJhd2F0IiwiaWF0IjoxNjM2ODE2ODU4fQ.mD42iTOqnSQ4FeavikkQeCraxP24o5Wt5RU3t3JWv3A
 
 ###
+POST http://localhost:3000/test/end/61a324ce97bcc926dbdb2f0f
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYWsucmF3YXRAc3R1ZGVudHMuaWlpdC5hYy5pbiIsIm5hbWUiOiJzYXJ0aGFrIHJhd2F0IiwiaWF0IjoxNjM2ODE2ODU4fQ.mD42iTOqnSQ4FeavikkQeCraxP24o5Wt5RU3t3JWv3A
 
+{
+    "start_time": "Sun Nov 28 2021 15:21:24 GMT+0530 (India Standard Time)",
+    "end_time": "Sun Nov 28 2021 16:21:24 GMT+0530 (India Standard Time)",
+    "mouse_coords": [{
+        "URL": "http://localhost:3000/index1.html",
+        "mouse_coords": [1, 2, 3, 4 ,5 ,6]
+    }],
+    "task_id": "61a324bf97bcc926dbdb2f0d"
+}
+###
+
+POST http://localhost:3000/page
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYWsucmF3YXRAc3R1ZGVudHMuaWlpdC5hYy5pbiIsIm5hbWUiOiJzYXJ0aGFrIHJhd2F0IiwiaWF0IjoxNjM2ODE2ODU4fQ.mD42iTOqnSQ4FeavikkQeCraxP24o5Wt5RU3t3JWv3A
+
+{
+    "URL": "http://localhost:3000/index1.html",
+    "mouse_coords": [1, 2, 3, 4 ,5 ,6]
+}
+###
+GET http://localhost:3000/page
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYWsucmF3YXRAc3R1ZGVudHMuaWlpdC5hYy5pbiIsIm5hbWUiOiJzYXJ0aGFrIHJhd2F0IiwiaWF0IjoxNjM2ODE2ODU4fQ.mD42iTOqnSQ4FeavikkQeCraxP24o5Wt5RU3t3JWv3A
+
+{
+    "URL": "http://localhost:3000/index1.html"
+}
+###
 61a1260f282df323112b263f

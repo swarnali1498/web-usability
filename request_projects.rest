@@ -11,6 +11,12 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcnRoYW
 
 ###
 
+GET http://localhost:3000/project/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTlmYjFiOGI0NTQ1ZDBjZGVkOGE1NmIiLCJlbWFpbCI6InNhcnRoYWtAZ21haWwuY29tIiwibmFtZSI6InNhcnRoYWsgcmF3YXQiLCJpYXQiOjE2Mzc4NjY3Mzd9.347P6BR-MgwOeNTVEuyUsKhYO8J0NHzqKqDPkZHK_V8
+
+###
+
+
 GET http://localhost:3000/project/619fd08d528a3635a7f54a6b/info
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTlmYjFiOGI0NTQ1ZDBjZGVkOGE1NmIiLCJlbWFpbCI6InNhcnRoYWtAZ21haWwuY29tIiwibmFtZSI6InNhcnRoYWsgcmF3YXQiLCJpYXQiOjE2Mzc4NjY3Mzd9.347P6BR-MgwOeNTVEuyUsKhYO8J0NHzqKqDPkZHK_V8
 

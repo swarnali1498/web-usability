@@ -103,6 +103,8 @@
       })
     })
 
+    localStorage.setItem("page_list", "");
+
     var user_email = sessionStorage.getItem('user_email')
     var user_type = sessionStorage.getItem('user_type')
     var server_address = sessionStorage.getItem('server_address')
@@ -137,7 +139,7 @@
     const wraper = async function () {
       const responseTaskInfo = await getResponse(url);
       const responseTestsList = await getResponse(server_address + "test/" + project_id + "/" + task_id);
-      
+
       var task_info_object = responseTaskInfo
       var task_list_object = responseTestsList
       test_id = task_list_object[0]["_id"];
