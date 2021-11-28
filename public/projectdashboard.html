@@ -103,7 +103,7 @@
         <h4>Site Heat Map</h4>
       </div>
       <div class="col-12 heatmap demo-wrapper" style="max-height:100%;">
-        <img src="./Index1.png" class="" style="width:100%; overflow: scroll; z-index: 1">
+        <img id="heat-map" src="./Index1.png" class="" style="width:100%; overflow: scroll; z-index: 1">
       </div>
     </div>
 
@@ -130,6 +130,7 @@
     crossorigin="anonymous"></script>
     
   <script> //$('.carousel').carousel(); 
+
     var user_email = sessionStorage.getItem('user_email')
     var user_type = sessionStorage.getItem('user_type')
     var server_address = sessionStorage.getItem('server_address')
@@ -147,6 +148,7 @@
       GET project/tasks/{project_id}
     */
    
+
     if (user_type == "participant/") {
       url_get = server_address + user_type + "project/" + project_id + "/tasks";
     } else {
@@ -314,6 +316,9 @@
       }
     }
     async function generateHeatMap() {
+      heat_map_width = document.getElementById('heat-map').offsetWidth;
+      screen = window.screen.width;
+
       console.log("ASh");
       //console.log(ev.layerX,ev.layerY);
       data = {}
@@ -322,8 +327,8 @@
       var coordinates = res["mouse_coords"];
       for(let i = 0; i<coordinates.length; i+=2){
         heatmapInstance.addData({
-          x: coordinates[i],
-          y: coordinates[i+1],
+          x: (coordinates[i] * heat_map_width)/screen,
+          y: (coordinates[i+1] * heat_map_width)/screen,
           value: 100,
         });
       }
