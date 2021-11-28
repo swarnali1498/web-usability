@@ -9,10 +9,11 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="./style.css" rel="stylesheet">
   <title>Web-Usability</title>
+
 </head>
 
-<body class="min-vw-100">
-  <nav class="navbar navbar-light bg-light">
+<body class="min-vw-100 ">
+  <nav class="navbar navbar-light bg-light ">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24"
@@ -25,7 +26,8 @@
       </div>
     </div>
   </nav>
-  <div class="modal fade project-register-form" role="dialog" style="height:80vh;top:80px">
+
+  <div class="modal fade project-register-form" role="dialog" style="height:80vh;top:80px" style="z-index: 1;">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
@@ -78,9 +80,12 @@
           <div class="col-3 ">
             <h4>Tasks:</h4>
           </div>
-          <div id="adminMode" class="col-3"><button id="addProject"
+          
+          <div id="adminMode" class="col-6">
+            <button id="addProject"
               class="projectItem btn me-5 btn-success align-self-end" type="submit" data-bs-toggle="modal"
-              data-bs-target=".project-register-form">+ Tasks</button></div>
+              data-bs-target=".project-register-form">+ Tasks</button>
+            </div>
 
 
         </div>
@@ -90,6 +95,15 @@
         </div>
       </div>
 
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h4>Site Heat Map</h4>
+      </div>
+      <div class="col-12 heatmap demo-wrapper" style="max-height:100%;">
+        <img src="./Index1.png" class="" style="width:100%; overflow: scroll; z-index: 1">
+      </div>
     </div>
 
   </div>
@@ -106,12 +120,14 @@
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+  
     integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
   <!-- CSS only -->
   <!-- JavaScript Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+    
   <script> //$('.carousel').carousel(); 
     var user_email = sessionStorage.getItem('user_email')
     var user_type = sessionStorage.getItem('user_type')
@@ -121,12 +137,15 @@
     var project_name = sessionStorage.getItem('project_name')
     var url_post = "";
     var url_get = "";
+    var heat_map_width="";
+    var screen = "";
+    var project_url = "";
     /* 
       observer: fetch tasks of the project_id
   
       GET project/tasks/{project_id}
     */
-
+   
     if (user_type == "participant/") {
       url_get = server_address + user_type + "project/" + project_id + "/tasks";
     } else {
@@ -181,12 +200,25 @@
       $('#projectOrganization').prepend(project_info_object["organization"]);
       $('#projectURL').prepend(project_info_object["URL"]);
       $('#projectDescription').prepend(project_info_object["description"]);
+      generateHeatMap();
     }
-    //var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
-    // var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
-    wraper();
-    //var taskList = JSON.parse( responseList );
+        //wraper();
 
+
+    // if (user_type != "observer/") {
+    //   console.log("sda");
+    //   $("#adminMode").hide();
+    // }
+    var responseList = '[{"id":"1","name":"task 1"}, {"id":"2", "name":"task 2"}, {"id":"3", "name":"task 3"}, {"id":"3", "name":"task 3"}]';
+    var projectInfo ='[{"organization":"IIT-H SERC","URL":"www.iith.ac.in", "description":"Project management is the process of leading the work of a team to achieve all project goals within the given constraints."}]'
+
+    var taskList = JSON.parse( responseList );
+    $('#projectName').prepend(project_name);
+    $('#projectOrganization').prepend(projectInfo["organization"]);
+    $('#projectURL').prepend(projectInfo["URL"]);
+    project_url = projectInfo["URL"];
+    $('#projectDescription').prepend(projectInfo["description"]);
+    
     function handleTaskSelect(id) {
 
       sessionStorage.setItem('task_id', taskList["data"][id].id);
@@ -198,10 +230,10 @@
       }
     }
     //console.log(project_info_object["description"])
-    if (user_type != "observer/") {
-      console.log("sda");
-      $("#adminMode").hide();
-    }
+    // if (user_type != "observer/") {
+    //   console.log("sda");
+    //   $("#adminMode").hide();
+    // }
 
     async function postFormDataAsJson(url, formData) {
       const plainFormData = Object.fromEntries(formData.entries());
@@ -252,7 +284,48 @@
     const taskForm = document.getElementById("task-form");
     taskForm.addEventListener("submit", handleSubmit);
   </script>
-
+  <script src="./heatmap.js"></script>
+  <script>
+    var heatmapInstance = h337.create({
+      container: document.querySelector('.heatmap'),
+      radius: 25,
+      maxOpacity: .7,backgroundColor: 'rgba(0,0,0,.09)',
+    //   minOpacity: .4,
+    
+    });
+    async function getCoordinate(url,data) {
+      const fetchOptions = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "token " + token,
+        },
+        body: data
+      };
+      try {
+        let response = await fetch(url, fetchOptions);
+        response = await response.json();
+        console.log(response);
+        return response;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    async function generateHeatMap() {
+      console.log("ASh");
+      //console.log(ev.layerX,ev.layerY);
+      data = {}
+      data["URL"] = project_url;
+      var res = await getCoordinate(server_address + "page", data);
+      var coordinates = res["mouse_coords"];
+      for(let i = 0; i<coordinates.length; i+=2){
+        heatmapInstance.addData({
+          x: coordinates[i],
+          y: coordinates[i+1],
+          value: 100,
+        });
+      }
+    };
+  </script>
 </body>
-
-</html>
